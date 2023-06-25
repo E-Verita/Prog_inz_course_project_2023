@@ -21,7 +21,6 @@ import lombok.Setter;
 
 @Table(name="user_table")
 @Entity
-@MappedSuperclass
 @NoArgsConstructor
 @Data
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)

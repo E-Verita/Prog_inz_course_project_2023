@@ -3,6 +3,7 @@ package lv.venta.models.users;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
@@ -26,6 +27,7 @@ import lv.venta.models.Course;
 @Getter
 @Setter
 @NoArgsConstructor
+@AttributeOverride(name="Idp", column = @Column(name="Ids"))
 public class Student extends Person {
 
 	// TODO izveidot DATA JPA anotācijas
@@ -45,7 +47,7 @@ public class Student extends Person {
 	@JoinTable(name="student_debt_courses_table",
 	joinColumns = @JoinColumn(name="Idc"),
 	inverseJoinColumns = @JoinColumn(name="Idp"))
-	private Collection <Course> debtCourse = new ArrayList<>();
+	private Collection <Course> debtCourses = new ArrayList<>();
 	
 	public Student(
 			@Pattern(regexp = "[A-ZĀČĒĪĶĻŅŠŪŽ]{1}[a-zāčēīķļņšūž\\ ]+", message = "Pirmajam burtam jābūt lielajam") @NotNull @Size(min = 3, max = 15) String name,

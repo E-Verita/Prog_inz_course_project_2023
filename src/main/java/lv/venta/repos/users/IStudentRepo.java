@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import lv.venta.models.users.Student;
 
-public interface IStudent extends CrudRepository <Student, Long> {
+public interface IStudentRepo extends CrudRepository <Student, Long> {
 
 }

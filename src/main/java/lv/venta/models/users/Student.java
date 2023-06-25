@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -21,6 +22,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.venta.models.Course;
+import lv.venta.models.Thesis;
 
 @Table(name = "student_table")
 @Entity
@@ -49,6 +51,10 @@ public class Student extends Person {
 	inverseJoinColumns = @JoinColumn(name="Idp"))
 	private Collection <Course> debtCourses = new ArrayList<>();
 	
+	@OneToMany(mappedBy="student")
+	private Collection<Thesis> thesis;
+	
+	
 	public Student(
 			@Pattern(regexp = "[A-ZĀČĒĪĶĻŅŠŪŽ]{1}[a-zāčēīķļņšūž\\ ]+", message = "Pirmajam burtam jābūt lielajam") @NotNull @Size(min = 3, max = 15) String name,
 			@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-ZĀČĒĪĶĻŅŠŪŽ]{1}[a-zāčēīķļņšūž\\ ]+", message = "Pirmajam burtam jābūt lielajam") String surname,
@@ -61,6 +67,17 @@ public class Student extends Person {
 	}
 	
 	
+	public void addDebtCourse(Course course) {
+		if(!debtCourses.contains(course)) {
+			debtCourses.add(course);
+		}
+	}
+	
+	public void removeDebtCourse(Course course) {
+		if(debtCourses.contains(course)) {
+			debtCourses.remove(course);
+		}
+	}
 
 }
 

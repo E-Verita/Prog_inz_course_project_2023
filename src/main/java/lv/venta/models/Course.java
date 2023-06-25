@@ -59,4 +59,16 @@ public class Course {
 		this.title = title;
 		this.creditPoints = creditPoints;
 	}
+	
+	public void addStudent(Student student) {
+		if(!debtStudents.contains(student)) {
+			debtStudents.add(student);
+		}
+	}
+	
+	public void removeStudent(Student student) {
+		if(debtStudents.contains(student)) {
+			debtStudents.remove(student);
+		}
+	}
 }

@@ -43,7 +43,7 @@ public class Thesis {
 	@Size(min = 3, max = 250)
 	private String titleLv;
 
-	@Column(name = "TitleLv")
+	@Column(name = "TitleEn")
 	@Size(min = 3, max = 250)
 	private String titleEn;
 

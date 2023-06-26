@@ -15,6 +15,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lv.venta.models.Comment;
+import lv.venta.models.Course;
 import lv.venta.models.Thesis;
 
 @Table(name = "academic_table")
@@ -22,33 +24,33 @@ import lv.venta.models.Thesis;
 @Getter
 @Setter
 @NoArgsConstructor
-@AttributeOverride(name="Idp", column = @Column(name="Ida"))
-public class AcademicPersonel extends Person{
+@AttributeOverride(name = "Idp", column = @Column(name = "Ida"))
+public class AcademicPersonel extends Person {
 	
-	@Column(name="Degree")
+	@Column(name = "Degree")
 	private Degree degree;
-
-	@OneToMany(mappedBy="supervisor")
-	private Collection <Thesis> thesis;
 	
+	@OneToMany(mappedBy = "supervisor")
+	private Collection<Thesis> thesis;
 	
-	@ManyToMany(mappedBy="reviewers")
-	private Collection <Thesis> thesisForReviews = new ArrayList<>();
+	@ManyToMany(mappedBy = "reviewers")
+	private Collection<Thesis> thesisForReviews = new ArrayList<>();
 	
-	public void addThesisForReviews(Thesis thesis) {
-		if(!thesisForReviews.contains(thesis)) {
-			thesisForReviews.add(thesis);
+	public void addThesisForReviews(Thesis inputThesis) {
+		if(! thesisForReviews.contains(inputThesis)) {
+			thesisForReviews.add(inputThesis);
 		}
 	}
 
 	public AcademicPersonel(
-			@Pattern(regexp = "[A-ZĀČĒĪĶĻŅŠŪŽ]{1}[a-zāčēīķļņšūž\\ ]+", message = "Pirmajam burtam jābūt lielajam") @NotNull @Size(min = 3, max = 15) String name,
-			@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-ZĀČĒĪĶĻŅŠŪŽ]{1}[a-zāčēīķļņšūž\\ ]+", message = "Pirmajam burtam jābūt lielajam") String surname,
-			@NotNull @Size(min = 12, max = 12) @Pattern(regexp = "[0-9]{6}-[0-9]{5}", message = "Neatbilstošs personas kods!") String personCode,
+			@NotNull @Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") @Size(min = 3, max = 15) String name,
+			@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") String surname,
+			@NotNull @Size(min = 12, max = 12) @Pattern(regexp = "[0-9]{6}-[0-9]{5}", message = "Neatbilstošs personas kods") String personcode,
 			User user, Degree degree) {
-		super(name, surname, personCode, user);
+		super(name, surname, personcode, user);
 		this.degree = degree;
 	}
-	
-	
+	@OneToMany(mappedBy = "personel")
+	private Collection<Comment> comments;
+
 }

@@ -42,7 +42,7 @@ public class Course {
 	@Column(name = "Title")
 	@NotNull
 	@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam")
-	@Size(min = 5, max = 25)
+	@Size(min = 4, max = 25)
 	private String title;
 	
 	@Min(value = 1)

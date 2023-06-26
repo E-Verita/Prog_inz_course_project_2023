@@ -29,8 +29,8 @@ import lv.venta.models.Thesis;
 @Getter
 @Setter
 @NoArgsConstructor
-@AttributeOverride(name="Idp", column = @Column(name="Ids"))
-public class Student extends Person {
+@AttributeOverride(name = "Idp", column = @Column(name = "Ids"))
+public class Student extends Person{
 
 	// TODO izveidot DATA JPA anotācijas
 	// izveidot validāciju anotācijas
@@ -47,8 +47,8 @@ public class Student extends Person {
 
 	@ManyToMany
 	@JoinTable(name="student_debt_courses_table",
-	joinColumns = @JoinColumn(name="Idc"),
-	inverseJoinColumns = @JoinColumn(name="Idp"))
+	joinColumns = @JoinColumn(name="Idp"),
+	inverseJoinColumns = @JoinColumn(name="Idc"))
 	private Collection <Course> debtCourses = new ArrayList<>();
 	
 	@OneToMany(mappedBy="student")

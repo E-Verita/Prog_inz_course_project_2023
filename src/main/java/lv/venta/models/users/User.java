@@ -11,33 +11,36 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Table(name="user_table")
+@Table(name = "user_table")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+//TODO pielikt @ToString, ja nepieciešams
 public class User {
 
-	@Setter(value=AccessLevel.NONE)
-	@Column(name="Idu")
+	@Setter(value = AccessLevel.NONE)
+	@Column(name = "Idu")
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idu;
 	
-	@Column(name="Pasword")
+	
+	//TODO Data JPA anotācijas
+	//TODO validāciju anotācijas
+	
+	@Column(name = "Password")
 	@NotNull
-	//TODO:Papildināt ar validāciju, kad ir zināms enkodētajs
-	private String password; //TODO: kad rudenī Pievienos Spring Security, tad jauzliek password Encoder
-
-	@Column(name="Email")
+	//TODO papildinat ar validāciju, kad ir zināms passwordEncoder
+	private String password;//TODO kad pievienos Spring Security, tad jāuzliek passwordEncoder
+	
+	@Column(name = "Email")
 	@NotNull
 	@Email
 	private String email;
@@ -47,8 +50,18 @@ public class User {
 		this.email = email;
 	}
 	
-	@OneToOne(mappedBy="user")
+	@OneToOne(mappedBy = "user")
 	private Person person;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

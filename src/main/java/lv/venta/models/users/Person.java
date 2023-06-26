@@ -15,55 +15,58 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name="user_table")
+@Table(name = "person_table")
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
-@Data
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//TODO pielikt @ToString, ja nepieciešams
 public class Person {
-	@Setter(value=AccessLevel.NONE)
-	@Column(name="Idp")
+	@Setter(value = AccessLevel.NONE)
+	@Column(name = "Idp")
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idp;
 	
-	@Column(name="Name")
-	@Pattern(regexp="[A-ZĀČĒĪĶĻŅŠŪŽ]{1}[a-zāčēīķļņšūž\\ ]+", message="Pirmajam burtam jābūt lielajam")
+	@Column(name = "Name")
 	@NotNull
+	@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam")
 	@Size(min = 3, max = 15)
 	private String name;
 	
 	@NotNull
 	@Size(min = 3, max = 15)
-	@Pattern(regexp="[A-ZĀČĒĪĶĻŅŠŪŽ]{1}[a-zāčēīķļņšūž\\ ]+", message="Pirmajam burtam jābūt lielajam")
-	@Column(name="Surname")
+	@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam")
+	@Column(name = "Surname")
 	private String surname;
-
-	//TODO: RISINAJUMS ĀRZEMJU PERSONAS KODIEM, jaunajiem LV studentiem
+	
 	@NotNull
+	//TODO apdomāt un pielietot risinājumu ārzemju studentiem un jaunajiem LV personas kodiem
 	@Size(min = 12, max = 12)
-	@Pattern(regexp="[0-9]{6}-[0-9]{5}", message="Neatbilstošs personas kods!")
-	@Column(name="PersonCode")	
-	private String personCode;
+	@Pattern(regexp = "[0-9]{6}-[0-9]{5}", message = "Neatbilstošs personas kods")
+	@Column(name = "Personcode")
+	private String personcode;
+	
 	
 	@OneToOne
-	@JoinColumn(name="Idu")
+	@JoinColumn(name = "Idu")
 	private User user;
 
+
 	public Person(
-			@Pattern(regexp = "[A-ZĀČĒĪĶĻŅŠŪŽ]{1}[a-zāčēīķļņšūž\\ ]+", message = "Pirmajam burtam jābūt lielajam") @NotNull @Size(min = 3, max = 15) String name,
-			@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-ZĀČĒĪĶĻŅŠŪŽ]{1}[a-zāčēīķļņšūž\\ ]+", message = "Pirmajam burtam jābūt lielajam") String surname,
-			@NotNull @Size(min = 12, max = 12) @Pattern(regexp = "[0-9]{6}-[0-9]{5}", message = "Neatbilstošs personas kods!") String personCode,
+			@NotNull @Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") @Size(min = 3, max = 15) String name,
+			@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") String surname,
+			@NotNull @Size(min = 12, max = 12) @Pattern(regexp = "[0-9]{6}-[0-9]{5}", message = "Neatbilstošs personas kods") String personcode,
 			User user) {
 		this.name = name;
 		this.surname = surname;
-		this.personCode = personCode;
+		this.personcode = personcode;
 		this.user = user;
 	}
-	
-	
+		
 }

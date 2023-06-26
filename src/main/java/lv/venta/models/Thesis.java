@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,7 +16,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -39,65 +48,115 @@ public class Thesis {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idt;
 
+	@NotNull
 	@Column(name = "TitleLv")
 	@Size(min = 3, max = 250)
 	private String titleLv;
 
-	@Column(name = "TitleLv")
+	@NotNull
+	@Column(name = "TitleEng")
 	@Size(min = 3, max = 250)
 	private String titleEn;
 
-	@Column(name = "Tasks")
-	@Size(min = 3, max = 250)
-	private String tasks;
-
-	@Column(name = "Aim")
-	@Size(min = 3, max = 250)
-	private String aim;
-
-	// TODO servisā pie jauna objekta izveides jaizmanto Localdate.now
-	@Column(name = "submitDateTime")
-	private LocalDateTime submitDateTime;
-
-	@Column(name = "statusFromSupervisor")
-	private boolean statusFromSupervisor;
-
-	@Column(name = "accSttaus")
-	private AcceptanceStatus accStatus;
-
-	@Column(name = "accDateTime")
-	private LocalDateTime accDateTime;
-
-	@ManyToOne
-	@JoinColumn(name = "Ids")
-	private Student student;
-
+	@NotNull
+	@Column(name = "applications")
+	@Size(min = 0, max = 20)
+	private int applications;
+	
+	@NotNull
+	@ElementCollection
+	@Enumerated(EnumType.STRING)
+	@Column(name = "areas")
+	private ArrayList<Area> areas;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name = "complexity")
+	private Complexity complexity;
+	
+	@NotNull
+	@Column(name="privateNotes")
+	@Size(min=0,max=500)
+	private String privateNotes;
+	
+	@NotNull
+	@Column(name="publicNotes")
+	@Size(min=0,max=500)
+	private String publicNotes;
+	
+	@OneToOne
+	@JoinColumn(name="Ids")
+	private Student assignedStudent;
+	
+	@ManyToMany(mappedBy="appliedThesis")
+	private Collection <Student> studentsApplied = new ArrayList<>();
+	
 	@ManyToOne
 	@JoinColumn(name = "Ida")
 	private AcademicPersonel supervisor;
-
+		
+	public void addStudent(Student student) {
+		if(!studentsApplied.contains(student)) {
+			studentsApplied.add(student);
+		}
+	}
+	
+	public void removeStudent(Student student) {
+		if(studentsApplied.contains(student)) {
+			studentsApplied.remove(student);
+		}
+	}
+	
 	@ManyToMany
-	@JoinTable(name = "thesis_reviewers", joinColumns = @JoinColumn(name = "Idt"), inverseJoinColumns = @JoinColumn(name = "Ida"))
+	@JoinTable(name = "thesis_reviewers",
+	joinColumns = @JoinColumn(name = "Idt"),
+	inverseJoinColumns = @JoinColumn(name = "Ida"))
 	private Collection<AcademicPersonel> reviewers = new ArrayList<>();
-
+	
+	
 	public void addReviewer(AcademicPersonel reviewer) {
-		if (!reviewers.contains(reviewer)) {
+		if(!reviewers.contains(reviewer)) {
 			reviewers.add(reviewer);
 		}
 	}
+	
+	public void removeReviewer(AcademicPersonel reviewer) {
+		if(reviewers.contains(reviewer)) {
+			reviewers.remove(reviewer);
+		}
+	}
+	
+	@OneToMany(mappedBy="thesis")
+	private Collection <ThesisApplication> thesisApplications;
 
-	public Thesis(@Size(min = 3, max = 250) String titleLv, @Size(min = 3, max = 250) String titleEn,
-			@Size(min = 3, max = 250) String tasks, @Size(min = 3, max = 250) String aim, Student student,
-			AcademicPersonel supervisor) {
+	public Thesis(@NotNull @Size(min = 3, max = 250) String titleLv, @NotNull @Size(min = 3, max = 250) String titleEn,
+			@NotNull ArrayList<Area> areas, @NotNull Complexity complexity,
+			@NotNull @Size(min = 0, max = 500) String publicNotes, AcademicPersonel supervisor) {
 		super();
 		this.titleLv = titleLv;
 		this.titleEn = titleEn;
-		this.tasks = tasks;
-		this.aim = aim;
-		this.student = student;
+		this.areas = areas;
+		this.complexity = complexity;
+		this.publicNotes = publicNotes;
 		this.supervisor = supervisor;
-		this.submitDateTime = LocalDateTime.now();
-		this.accStatus = AcceptanceStatus.submitted;
 	}
 
+	public Thesis(@NotNull @Size(min = 3, max = 250) String titleLv, @NotNull @Size(min = 3, max = 250) String titleEn,
+			@NotNull ArrayList<Area> areas, @NotNull Complexity complexity,
+			@NotNull @Size(min = 0, max = 500) String publicNotes, AcademicPersonel supervisor,
+			Collection<ThesisApplication> thesisApplications) {
+		super();
+		this.titleLv = titleLv;
+		this.titleEn = titleEn;
+		this.areas = areas;
+		this.complexity = complexity;
+		this.publicNotes = publicNotes;
+		this.supervisor = supervisor;
+		this.thesisApplications = thesisApplications;
+	}
+
+	
+	
+	
+	
 }

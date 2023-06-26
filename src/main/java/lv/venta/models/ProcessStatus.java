@@ -1,0 +1,6 @@
+package lv.venta.models;
+
+public enum ProcessStatus {
+	not_started, waiting_on_approval_by_supervisor, denied_by_supervisor, accepted_needs_corrections_according_to_supervisor, accepted_by_supervisor, pending_for_ITF_Board_meeting, denied_by_ITF_board, accepted_needs_corrections_according_to_ITF_Board, accepted_by_ITF_Board
+
+}

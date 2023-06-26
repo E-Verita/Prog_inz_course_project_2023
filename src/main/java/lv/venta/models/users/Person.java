@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -19,7 +20,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name="user_table")
+@Table(name="person_table")
 @Entity
 @NoArgsConstructor
 @Data
@@ -33,19 +34,19 @@ public class Person {
 	
 	@Column(name="Name")
 	@Pattern(regexp="[A-ZĀČĒĪĶĻŅŠŪŽ]{1}[a-zāčēīķļņšūž\\ ]+", message="Pirmajam burtam jābūt lielajam")
-	@NotNull
+	@NotNull(message="Field cannot be empty")
 	@Size(min = 3, max = 15)
 	private String name;
 	
-	@NotNull
+	@NotNull(message="Field cannot be empty")
 	@Size(min = 3, max = 15)
 	@Pattern(regexp="[A-ZĀČĒĪĶĻŅŠŪŽ]{1}[a-zāčēīķļņšūž\\ ]+", message="Pirmajam burtam jābūt lielajam")
 	@Column(name="Surname")
 	private String surname;
 
 	//TODO: RISINAJUMS ĀRZEMJU PERSONAS KODIEM, jaunajiem LV studentiem
-	@NotNull
-	@Size(min = 12, max = 12)
+	@NotNull(message="Field cannot be empty")
+	@Size(min = 12, max = 12, message="Personal code is 12 characters: 123456-78910")
 	@Pattern(regexp="[0-9]{6}-[0-9]{5}", message="Neatbilstošs personas kods!")
 	@Column(name="PersonCode")	
 	private String personCode;
@@ -64,6 +65,8 @@ public class Person {
 		this.personCode = personCode;
 		this.user = user;
 	}
+
+	
 	
 	
 }

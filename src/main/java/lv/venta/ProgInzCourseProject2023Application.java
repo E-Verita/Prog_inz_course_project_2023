@@ -5,13 +5,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import lv.venta.models.Course;
 import lv.venta.models.Thesis;
 import lv.venta.models.users.AcademicPersonel;
 import lv.venta.models.users.Degree;
 import lv.venta.models.users.Student;
 import lv.venta.models.users.User;
-import lv.venta.repos.ICourseRepo;
 import lv.venta.repos.IThesisRepo;
 import lv.venta.repos.users.IAcademicPersonelRepo;
 import lv.venta.repos.users.IStudentRepo;
@@ -24,7 +22,7 @@ public class ProgInzCourseProject2023Application {
 		SpringApplication.run(ProgInzCourseProject2023Application.class, args);
 	}
 
-	@Bean // izsauks funkciju automātiski, kad sistēma tiks startēta
+	/*@Bean // izsauks funkciju automātiski, kad sistēma tiks startēta
 	public CommandLineRunner testModel(IUserRepo userRepo, IAcademicPersonelRepo personRepo, IStudentRepo studentRepo, 
 			IAcademicPersonelRepo personelRepo, ICourseRepo courseRepo, IThesisRepo thesisRepo) {
 		return new CommandLineRunner() {
@@ -80,6 +78,6 @@ public class ProgInzCourseProject2023Application {
 
 		};
 
-	}
+	}*/
 
 }

@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import lv.venta.models.Comment;
 
-public interface ICommentRepo  extends CrudRepository <Comment, Long>{
+public interface ICommentRepo extends CrudRepository<Comment, Long> {
 
 }

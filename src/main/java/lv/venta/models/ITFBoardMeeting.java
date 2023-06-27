@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lv.venta.models.users.AcademicPersonel;
+import lv.venta.models.users.MeetingMember;
 import lv.venta.models.users.Student;
 
 @Table(name = "meeting_table")

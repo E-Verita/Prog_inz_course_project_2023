@@ -3,7 +3,9 @@ package lv.venta.models;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -19,6 +21,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -60,28 +63,33 @@ public class Thesis {
 
 	@NotNull
 	@Column(name = "applications")
-	@Size(min = 0, max = 20)
+	@Min(value = 0)
+	@Max(value = 12)
 	private int applications;
 	
-	@NotNull
-	@ElementCollection
-	@Enumerated(EnumType.STRING)
-	@Column(name = "areas")
-	private ArrayList<Area> areas;
+
+	//MTM ar Area
+		@ToString.Exclude
+		@NotNull 
+		@ElementCollection
+		@CollectionTable(name = "thesis_areas", joinColumns = @JoinColumn(name = "Idt"))
+		@Column(name = "Areas")
+		@Enumerated(EnumType.STRING) //EnumType.ORDINAL ja vajag attelot index
+		private Collection<Area> areas;
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "complexity")
 	private Complexity complexity;
 	
-	@NotNull
+	
 	@Column(name="privateNotes")
 	@Size(min=0,max=500)
 	private String privateNotes;
 	
 	@NotNull
 	@Column(name="publicNotes")
-	@Size(min=0,max=500)
+	@Size(min=0,max=1000)
 	private String publicNotes;
 	
 	@OneToOne
@@ -130,7 +138,7 @@ public class Thesis {
 	private Collection <ThesisApplication> thesisApplications;
 
 	public Thesis(@NotNull @Size(min = 3, max = 250) String titleLv, @NotNull @Size(min = 3, max = 250) String titleEn,
-			@NotNull ArrayList<Area> areas, @NotNull Complexity complexity,
+			@NotNull Collection<Area> areas, @NotNull Complexity complexity,
 			@NotNull @Size(min = 0, max = 500) String publicNotes, AcademicPersonel supervisor) {
 		super();
 		this.titleLv = titleLv;
@@ -142,7 +150,7 @@ public class Thesis {
 	}
 
 	public Thesis(@NotNull @Size(min = 3, max = 250) String titleLv, @NotNull @Size(min = 3, max = 250) String titleEn,
-			@NotNull ArrayList<Area> areas, @NotNull Complexity complexity,
+			@NotNull Collection<Area> areas, @NotNull Complexity complexity,
 			@NotNull @Size(min = 0, max = 500) String publicNotes, AcademicPersonel supervisor,
 			Collection<ThesisApplication> thesisApplications) {
 		super();

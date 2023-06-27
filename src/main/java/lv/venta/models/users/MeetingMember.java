@@ -1,4 +1,4 @@
-package lv.venta.models;
+package lv.venta.models.users;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +18,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lv.venta.models.users.AcademicPersonel;
+import lv.venta.models.Comment;
+import lv.venta.models.ITFBoardMeeting;
 
 @Table(name = "meeting_member")
 @Entity

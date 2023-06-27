@@ -16,7 +16,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lv.venta.models.MeetingMember;
 import lv.venta.models.StudyProgram;
 import lv.venta.models.Thesis;
 

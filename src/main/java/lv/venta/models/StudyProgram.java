@@ -15,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -62,12 +63,14 @@ public class StudyProgram {
 	private Level level;
 	
 	@Column(name = "noOfSemester")
-	@Size(min = 4, max = 12, message = "Number of semesters are 4-12")
+	@Min(value = 4, message = "Semester no. can be 4-12")
+	@Max(value = 12, message = "Semester no. can be 4-12")
 	@NotNull(message="Field cannot be empty")
 	private int noOfSemester;
 	
 	@Column(name = "thesisSemester")
-	@Size(min = 4, max = 12, message = "Semester no. for thesis can be 4-12")
+	@Min(value = 4, message = "Semester no. for thesis can be 4-12")
+	@Max(value = 12, message = "Semester no. for thesis can be 4-12")
 	@NotNull(message="Field cannot be empty")
 	private int thesisSemester;
 	
@@ -79,7 +82,6 @@ public class StudyProgram {
 	@NotNull
 	@Column(name = "grad")
 	@Min(value = 2023, message = "Graduation year must be greater than or equal to 2023")
-	@FutureOrPresent(message = "Graduation year must be today or in the future")
 	private int gradYear;
 	
 	@OneToMany(mappedBy="studyProgram")

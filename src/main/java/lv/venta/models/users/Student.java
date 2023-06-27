@@ -40,8 +40,7 @@ public class Student extends Person {
 
 	@Column(name="matriculaNo")
 	@NotNull 
-	@Size(min=8,max=20)
-	@Pattern(regexp="[0-9]{8,20}")
+	@Pattern(regexp="[a-z]{2}[0-9]{5}")
 	private String matriculaNo;
 
 	@NotNull

@@ -26,6 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.venta.models.StudyProgram;
 import lv.venta.models.Thesis;
+import lv.venta.models.ThesisApplication;
 
 @Table(name = "student_table")
 @Entity
@@ -70,12 +71,11 @@ public class Student extends Person {
 	@JoinColumn(name = "Idsp")
 	private StudyProgram studyProgram;
 	
-	@ManyToMany
-	@JoinTable(name="student_thesis_application_table",
-	joinColumns = @JoinColumn(name="Idt"),
-	inverseJoinColumns = @JoinColumn(name="Idp"))
-	private Collection <Thesis> appliedThesis = new ArrayList<>();
+	@OneToMany(mappedBy="student")
+	private Collection <ThesisApplication> thesisApplications;
+
 	
+
 	
 	public Student(
 			@Pattern(regexp = "[A-ZĀČĒĪĶĻŅŠŪŽ]{1}[a-zāčēīķļņšūž\\ ]+", message = "Pirmajam burtam jābūt lielajam") @NotNull @Size(min = 3, max = 15) String name,

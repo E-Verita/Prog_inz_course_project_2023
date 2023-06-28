@@ -16,7 +16,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
@@ -25,6 +24,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lv.venta.models.users.Student;
 
 @Table(name = "thesis_applications_table")
 @Entity
@@ -47,6 +47,10 @@ public class ThesisApplication {
 	@ManyToOne
     @JoinColumn(name = "Idt")
     private Thesis thesis;
+	
+	@ManyToOne
+    @JoinColumn(name = "Ids")
+    private Student student;
 	
 	@NotNull
 	@Column(name="aim")
@@ -97,10 +101,11 @@ public class ThesisApplication {
 	@Size(min=20,max=200)
 	private String ITFBoardNotesToStudent;
 
-	public ThesisApplication(Thesis thesis, @NotNull @Size(min = 20, max = 200) String aim,
+	public ThesisApplication(Thesis thesis, Student student,  @NotNull @Size(min = 20, max = 200) String aim,
 			@NotNull @Size(min = 20, max = 500) String tasks, LocalDateTime applicationDate) {
 		super();
 		this.thesis = thesis;
+		this.student = student;
 		this.aim = aim;
 		this.tasks = tasks;
 		this.applicationDate = applicationDate;

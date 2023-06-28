@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>New Thesis Application</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+    <h2>New Thesis Application</h2>
+
+    <form th:action="@{/application/addNew}" method="post">
+
+        <input type="hidden" th:name="thesis.idt" th:value="${thesisId}" />
+
+        <div>
+            <label for="aim">Aim:</label>
+            <textarea id="aim" name="aim" rows="4" cols="50" required></textarea>
+        </div>
+
+        <div>
+            <label for="tasks">Tasks:</label>
+            <textarea id="tasks" name="tasks" rows="4" cols="50" required></textarea>
+        </div>
+
+        <div>
+            <label for="applicationDate">Application Date:</label>
+            <input type="datetime-local" id="applicationDate" name="applicationDate" required>
+        </div>
+
+        <div>
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="PENDING">Pending</option>
+                <option value="APPROVED">Approved</option>
+                <option value="REJECTED">Rejected</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="doc">Document:</label>
+            <textarea id="doc" name="doc" rows="4" cols="50" required></textarea>
+        </div>
+
+        <div>
+            <label for="supervisorsPrivateNotes">Supervisor's Private Notes:</label>
+            <textarea id="supervisorsPrivateNotes" name="supervisorsPrivateNotes" rows="4" cols="50"></textarea>
+        </div>
+
+        <!-- Add more fields for other properties of the ThesisApplication class -->
+
+        <button type="submit">Submit Application</button>
+    </form>
+</body>
+
+</html>

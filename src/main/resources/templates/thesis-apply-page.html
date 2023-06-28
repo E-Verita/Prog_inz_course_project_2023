@@ -2,60 +2,59 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Thesis Details</title>
-	<link rel="stylesheet" type="text/css" href="/style.css">
+    <meta charset="UTF-8">
+    <title>Thesis Details</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 
 <body>
-	<h2>Thesis Details</h2>
-	<h3 th:text="${thesis.titleLv}"></h3>
-	<div class="container">
-		<div class="column">
-			<table>
-				<tr>
-					<th>Thesis ID:</th>
-					<td th:text="${thesis.idt}"></td>
-				</tr>
-				<tr>
-					<th>Title (LV):</th>
-					<td th:text="${thesis.titleLv}"></td>
-				</tr>
-				<tr>
-					<th>Title (EN):</th>
-					<td th:text="${thesis.titleEn}"></td>
-				</tr>
-				<tr>
-					<th>Applications:</th>
-					<td th:text="${thesis.applications}"></td>
-				</tr>
-				<tr>
-					<th>Areas:</th>
-					<td th:text="${thesis.areas}"></td>
-				</tr>
-				<tr>
-					<th>Complexity:</th>
-					<td th:text="${thesis.complexity}"></td>
-				</tr>
-				<tr>
-					<th>Public Notes:</th>
-					<td th:text="${thesis.publicNotes}"></td>
-				</tr>
-				<tr>
-					<th>Supervisor:</th>
-					<td th:text="${thesis.supervisor?.name + ' ' + thesis.supervisor?.surname}"></td>
-				</tr>
-			</table>
-			<div align="center">
-											
-											<!-- placeholder  -->
-				<button type="button" th:onclick="|location.href='/application/addNew|" >Apply</button>
-						<button type="button" onclick="location.href='/thesis/apply'">Cancel</button>
-											<!-- placeholder  -->
-
-					</div>
-			</div>
-		</div>
+    <h2>Thesis Details</h2>
+    <h3 th:text="${thesis.titleLv}"></h3>
+    <div class="container">
+        <div class="column">
+            <table>
+                <tr>
+                    <th>Thesis ID:</th>
+                    <td th:text="${thesis.idt}"></td>
+                </tr>
+                <tr>
+                    <th>Title (LV):</th>
+                    <td th:text="${thesis.titleLv}"></td>
+                </tr>
+                <tr>
+                    <th>Title (EN):</th>
+                    <td th:text="${thesis.titleEn}"></td>
+                </tr>
+                <tr>
+                    <th>Applications:</th>
+                    <td th:text="${thesis.applications}"></td>
+                </tr>
+                <tr>
+                    <th>Areas:</th>
+                    <td th:text="${thesis.areas}"></td>
+                </tr>
+                <tr>
+                    <th>Complexity:</th>
+                    <td th:text="${thesis.complexity}"></td>
+                </tr>
+                <tr>
+                    <th>Public Notes:</th>
+                    <td th:text="${thesis.publicNotes}"></td>
+                </tr>
+                <tr>
+                    <th>Supervisor:</th>
+                    <td th:text="${thesis.supervisor?.name + ' ' + thesis.supervisor?.surname}"></td>
+                </tr>
+            </table>
+            <div align="center">
+                <form th:action="@{/application/addNew}" method="post">
+                    <input type="hidden" th:name="thesis.idt" th:value="${thesis.idt}" />
+                    <button type="submit">Apply</button>
+                    <button type="button" onclick="location.href='/thesis/apply'">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

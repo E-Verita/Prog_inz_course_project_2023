@@ -44,4 +44,13 @@ public class ThesisServiceImplWithDB implements IThesisService {
 
 	}
 
+	@Override
+	public Thesis getThesisById(long id) throws Exception {
+		if (thesisRepo.existsById(id)) {
+			return thesisRepo.findById(id).get();
+		} else {
+			throw new Exception("Nepareizs Id");
+		}
+	}
+	
 }

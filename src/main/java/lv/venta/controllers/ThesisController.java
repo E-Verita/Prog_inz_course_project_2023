@@ -103,4 +103,20 @@ public class ThesisController {
 	    }
 	}
 	
+	@GetMapping("/show/{id}")
+	public String showThesisById(@PathVariable long id, Model model) {
+	    try {
+	        Thesis thesis = thesisService.getThesisById(id);
+	        if (thesis == null) {
+	            throw new Exception("Thesis not found with ID: " + id);
+	        }
+	        model.addAttribute("thesis", thesis);
+	        return "thesis-page";
+	    } catch (Exception e) {
+	        model.addAttribute("error", e.getMessage());
+	        return "error-page";
+	    }
+	}
+	
+	
 }

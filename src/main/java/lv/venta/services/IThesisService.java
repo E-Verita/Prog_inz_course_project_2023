@@ -15,6 +15,8 @@ public interface IThesisService {
 
 	void insertNewThesis(String titleLv, String titleEn, Collection<Area> areas, Complexity complexity,
 			String publicNotes, AcademicPersonel supervisor);
+
+	Thesis getThesisById(long id) throws Exception;
 	
 
 }

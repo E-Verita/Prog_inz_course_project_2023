@@ -23,6 +23,8 @@ public interface IThesisService {
 
 	void updateThesisById(long id, String titleLv, String titleEn, Collection<Area> areas, Complexity complexity,
 			String privateNotes, String publicNotes, Student assignedStudent, AcademicPersonel supervisor) throws Exception;
+
+	ArrayList<Thesis> selectAllByAssignedStudentIsNull() throws Exception;
 	
 
 }

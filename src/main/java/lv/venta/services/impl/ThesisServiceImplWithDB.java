@@ -81,5 +81,15 @@ public class ThesisServiceImplWithDB implements IThesisService {
 	        throw new Exception("Invalid ID");
 	    }
 	}
+
+	@Override
+	public ArrayList<Thesis> selectAllByAssignedStudentIsNull()  throws Exception{
+		try {
+			return (ArrayList<Thesis>) thesisRepo.findAllByAssignedStudentIsNull();
+		} catch (Exception e) {
+			throw new Exception("Cannot get unassigned thesis records from DB: " + e.getMessage());
+		}
+	}
+	
 	
 }

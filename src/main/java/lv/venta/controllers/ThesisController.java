@@ -182,5 +182,35 @@ public class ThesisController {
 	    }
 	}
 
+	// STUDENTS - see all to apply
+	@GetMapping("/apply")
+	public String showAwailableThesis(Model model) throws Exception {
+		 try {
+		ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicRepo.findAll();
+		ArrayList<Thesis> thesis = thesisService.selectAllByAssignedStudentIsNull();
+		model.addAttribute("searchedElement", "Application");
+		model.addAttribute("thesis", thesis);
+        model.addAttribute("supervisors", supervisors);
+		model.addAttribute("complexities", complexities);
+		return "thesis-all-apply-page";
+	} catch (Exception e) {
+        model.addAttribute("error", e.getMessage());
+        return "error-page";
+    }
+	}
 	
+	@GetMapping("/apply/{id}")
+	public String showThesisInformation(@PathVariable long id, Model model) {
+		try {
+	        Thesis thesis = thesisService.getThesisById(id);
+	        if (thesis == null) {
+	            throw new Exception("Thesis not found with ID: " + id);
+	        }
+	        model.addAttribute("thesis", thesis);
+	        return "thesis-apply-page";
+	    } catch (Exception e) {
+	        model.addAttribute("error", e.getMessage());
+	        return "error-page";
+	    }
+	}
 }

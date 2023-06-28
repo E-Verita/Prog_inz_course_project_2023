@@ -10,5 +10,6 @@ public interface IThesisRepo extends CrudRepository <Thesis, Long> {
 
 	ArrayList<Thesis> findAllBySupervisor_Idp(long supervisorId);
 
+	ArrayList<Thesis> findAllByAssignedStudentIsNull();
 
 }

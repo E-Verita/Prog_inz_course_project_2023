@@ -13,12 +13,7 @@
                 <tr>
                     <th>Thesis ID</th>
                     <th>Title (LV)</th>
-                    <th>Title (EN)</th>
-                    <th>Applications</th>
-                    <th>Areas</th>
                     <th>Complexity</th>
-                    <th>Public Notes</th>
-                    <th>Assigned Student</th>
                     <th>Supervisor</th>
                 </tr>
             </thead>
@@ -26,19 +21,10 @@
                 <tr th:each="thesis : ${thesis}">
                     <td th:text="${thesis.idt}"></td>
                     <td><b>
-                        <a th:href="@{/thesis/show/{id}(id=${thesis.idt})}" th:text="${thesis.titleLv}"></a>
+                        <a th:href="@{/thesis/apply/{id}(id=${thesis.idt})}" th:text="${thesis.titleLv}"></a>
                         </b>
                     </td>
-                    <td th:text="${thesis.titleEn}"></td>
-                    <td th:text="${thesis.applications}"></td>
-                    <td>
-                        <ul>
-                            <li th:each="area : ${thesis.areas}" th:text="${area}"></li>
-                        </ul>
-                    </td>
                     <td th:text="${thesis.complexity}"></td>
-                    <td th:text="${thesis.publicNotes}"></td>
-                    <td th:text="${thesis.assignedStudent?.name}"></td>
                     <td th:text="${thesis.supervisor.name + ' ' + thesis.supervisor.surname + ' (' + thesis.supervisor.degree + ')'}"></td>
                 </tr>
             </tbody>
@@ -49,8 +35,6 @@
         </div>
        
     </div>
-     <div align="center">
-				<button type="button" onclick="location.href='/thesis/addNew'">Add new Thesis</button>
-			</div>
+
 </body>
 </html>

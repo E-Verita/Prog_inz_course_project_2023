@@ -19,8 +19,8 @@ import lv.venta.models.Complexity;
 import lv.venta.models.Thesis;
 import lv.venta.models.users.AcademicPersonel;
 import lv.venta.models.users.Student;
-import lv.venta.repos.users.IAcademicPersonelRepo;
-import lv.venta.repos.users.IStudentRepo;
+import lv.venta.services.IAcademicPersonelService;
+import lv.venta.services.IStudentService;
 import lv.venta.services.IThesisService;
 
 @Controller
@@ -31,10 +31,10 @@ public class ThesisController {
 	private IThesisService thesisService;
 	
 	@Autowired
-    private IAcademicPersonelRepo academicRepo;
+    private IAcademicPersonelService academicService;
 	
 	@Autowired
-    private IStudentRepo studentRepo;
+    private IStudentService studentService;
 	
 	private ArrayList<Area> areas = new ArrayList<>(Arrays.asList(Area.values()));
 	private ArrayList<Complexity> complexities = new ArrayList<>(Arrays.asList(Complexity.values()));
@@ -78,8 +78,8 @@ public class ThesisController {
 	}
 	
 	@GetMapping("/addNew")
-	public String showAddThesisForm(Model model) {
-		ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicRepo.findAll();
+	public String showAddThesisForm(Model model) throws Exception {
+		ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
         model.addAttribute("supervisors", supervisors);
 		model.addAttribute("thesis", new Thesis());
 		model.addAttribute("areas", areas);
@@ -89,7 +89,7 @@ public class ThesisController {
 
 	
 	@PostMapping("/addNew")
-	public String addNewThesis(@Valid @ModelAttribute Thesis thesis, BindingResult result, Model model) {
+	public String addNewThesis(@Valid @ModelAttribute Thesis thesis, BindingResult result, Model model) throws Exception {
 	    if (!result.hasErrors()) {
 	        try {
 	        	thesisService.insertNewThesis(thesis.getTitleLv(), thesis.getTitleEn(), thesis.getAreas(), thesis.getComplexity(), 
@@ -100,7 +100,7 @@ public class ThesisController {
 	            return "error-page";
 	        }
 	    } else {
-	    	 ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicRepo.findAll();
+	    	 ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
 	         model.addAttribute("supervisors", supervisors);
 	         model.addAttribute("areas", areas);
 	         model.addAttribute("complexities", complexities);
@@ -153,11 +153,11 @@ public class ThesisController {
 	    try {
 	        Thesis thesis = thesisService.getThesisById(id);
 	        model.addAttribute("thesis", thesis);
-			ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicRepo.findAll();
+			ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
 		     model.addAttribute("supervisors", supervisors);
 	         model.addAttribute("areas", areas);
 	         model.addAttribute("complexities", complexities);
-	         ArrayList<Student> students = (ArrayList<Student>) studentRepo.findAll();
+	         ArrayList<Student> students = (ArrayList<Student>) studentService.findAll();
 	         model.addAttribute("students", students);
 	        return "thesis-update-page";
 	    } catch (Exception e) {
@@ -186,7 +186,7 @@ public class ThesisController {
 	@GetMapping("/apply")
 	public String showAwailableThesis(Model model) throws Exception {
 		 try {
-		ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicRepo.findAll();
+		ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
 		ArrayList<Thesis> thesis = thesisService.selectAllByAssignedStudentIsNull();
 		model.addAttribute("searchedElement", "Application");
 		model.addAttribute("thesis", thesis);

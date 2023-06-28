@@ -44,10 +44,12 @@ public class ThesisApplication {
 	@OneToMany(mappedBy="thesisApplication")
     private Collection <Comment> commentsFromITFBoardMeeting;
 	
+	@NotNull
 	@ManyToOne
     @JoinColumn(name = "Idt")
     private Thesis thesis;
 	
+	@NotNull
 	@ManyToOne
     @JoinColumn(name = "Ids")
     private Student student;

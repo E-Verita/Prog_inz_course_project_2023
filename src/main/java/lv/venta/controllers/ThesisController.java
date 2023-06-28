@@ -200,7 +200,7 @@ public class ThesisController {
 	}
 	
 	@GetMapping("/apply/{id}")
-	public String showThesisInformation(@PathVariable long id, Model model) {
+	public String showThesisInformation(@PathVariable("id")  long id, Model model) {
 		try {
 	        Thesis thesis = thesisService.getThesisById(id);
 	        if (thesis == null) {

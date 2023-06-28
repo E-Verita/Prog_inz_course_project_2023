@@ -25,7 +25,10 @@
             <tbody>
                 <tr th:each="thesis : ${thesis}">
                     <td th:text="${thesis.idt}"></td>
-                    <td th:text="${thesis.titleLv}"></td>
+                    <td><b>
+                        <a th:href="@{/thesis/show/{id}(id=${thesis.idt})}" th:text="${thesis.titleLv}"></a>
+                        </b>
+                    </td>
                     <td th:text="${thesis.titleEn}"></td>
                     <td th:text="${thesis.applications}"></td>
                     <td>

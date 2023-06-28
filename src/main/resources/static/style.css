@@ -119,10 +119,11 @@ table tr th,
 table tr td {
     padding: 0.25rem 0.5rem;
     border: 1px solid var(--bg-dark-gray);
+    text-align: left;
 }
 
 table tr th {
-    text-align: left;
+    text-align: center;
 }
 
 table tr:nth-of-type(even) td {

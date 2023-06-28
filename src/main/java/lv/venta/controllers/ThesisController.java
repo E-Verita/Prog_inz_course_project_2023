@@ -118,5 +118,28 @@ public class ThesisController {
 	    }
 	}
 	
+	@GetMapping("/remove/{id}")
+	public String removeThesisById(@PathVariable("id") long id, Model model) {
+		try {
+			thesisService.deleteThesisById(id);
+			model.addAttribute("thesis", thesisService.selectAllThesis());
+			return "redirect:/thesis/showAll";
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+			return "error-page";
+		}
+	}
+	
+	@PostMapping("/remove/{id}")
+	public String removeThesisByIdRedirected(@PathVariable("id") long id, Model model) {
+		try {
+			thesisService.deleteThesisById(id);
+			model.addAttribute("thesis", thesisService.selectAllThesis());
+			return "redirect:/thesis/showAll";
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+			return "error-page";
+		}
+	}
 	
 }

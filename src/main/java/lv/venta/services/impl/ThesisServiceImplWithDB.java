@@ -49,7 +49,16 @@ public class ThesisServiceImplWithDB implements IThesisService {
 		if (thesisRepo.existsById(id)) {
 			return thesisRepo.findById(id).get();
 		} else {
-			throw new Exception("Nepareizs Id");
+			throw new Exception("Incorrect Id");
+		}
+	}
+
+	@Override
+	public void deleteThesisById(long id) throws Exception {
+		if (thesisRepo.existsById(id)) {
+			thesisRepo.deleteById(id);
+		} else {
+			throw new Exception("Incorrect Id");
 		}
 	}
 	

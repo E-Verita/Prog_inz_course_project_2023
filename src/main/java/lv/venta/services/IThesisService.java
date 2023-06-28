@@ -17,6 +17,8 @@ public interface IThesisService {
 			String publicNotes, AcademicPersonel supervisor);
 
 	Thesis getThesisById(long id) throws Exception;
+
+	void deleteThesisById(long id)  throws Exception;
 	
 
 }

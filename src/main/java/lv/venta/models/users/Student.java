@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -31,7 +32,7 @@ import lv.venta.models.Thesis;
 @Getter
 @Setter
 @NoArgsConstructor
-@AttributeOverride(name="Idp", column = @Column(name="Ids"))
+@PrimaryKeyJoinColumn(name = "Ids", referencedColumnName = "Idp")
 public class Student extends Person {
 
 	// TODO izveidot DATA JPA anotācijas

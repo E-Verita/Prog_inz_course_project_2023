@@ -133,3 +133,12 @@ table tr:nth-of-type(even) td {
 table tr:hover td {
     background-color: rgba(0, 0, 0, 0.05); 
 }
+
+/* form */
+input[type="text"],
+        textarea,
+        select {
+            width: 80%;
+            padding: 8px;
+            font-size: 80%;
+        }

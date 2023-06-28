@@ -10,6 +10,7 @@ import lv.venta.models.Area;
 import lv.venta.models.Complexity;
 import lv.venta.models.Thesis;
 import lv.venta.models.users.AcademicPersonel;
+import lv.venta.models.users.Student;
 import lv.venta.repos.IThesisRepo;
 import lv.venta.services.IThesisService;
 
@@ -60,6 +61,25 @@ public class ThesisServiceImplWithDB implements IThesisService {
 		} else {
 			throw new Exception("Incorrect Id");
 		}
+	}
+
+	@Override
+	public void updateThesisById(long id, String titleLv, String titleEn, Collection<Area> areas, Complexity complexity,
+			String privateNotes, String publicNotes, Student assignedStudent, AcademicPersonel supervisor) throws Exception {
+		if (thesisRepo.existsById(id)) {
+	        Thesis updatedThesis = thesisRepo.findById(id).get();
+	        updatedThesis.setTitleLv(titleLv);
+	        updatedThesis.setTitleEn(titleEn);
+	        updatedThesis.setAreas(areas);
+	        updatedThesis.setComplexity(complexity);
+	        updatedThesis.setPrivateNotes(privateNotes);
+	        updatedThesis.setPublicNotes(publicNotes);
+	        updatedThesis.setAssignedStudent(assignedStudent);
+	        updatedThesis.setSupervisor(supervisor);
+	        thesisRepo.save(updatedThesis);
+	    } else {
+	        throw new Exception("Invalid ID");
+	    }
 	}
 	
 }

@@ -54,12 +54,16 @@
 					<td th:text="${thesis.supervisor?.name + ' ' + thesis.supervisor?.surname}"></td>
 				</tr>
 			</table>
-			  <div align="center">
-<form th:action="@{${'/thesis/remove/' + thesis.idt}}" method="post" onsubmit="return confirm('Are you sure you want to delete this record?')">
-                    <button type="submit" class="button">Delete</button>
-                </form>
+			<div align="center">
+				<form th:action="@{${'/thesis/remove/' + thesis.idt}}" method="post"
+					onsubmit="return confirm('Are you sure you want to delete this record?')">
+					<button type="submit" class="button">Delete</button>
+				<button type="button" th:onclick="|location.href='/thesis/update/' + ${thesis.idt}|" >Update</button>
+						<button type="button" onclick="location.href='/thesis/showAll'">Cancel</button>
+					</div>
+				</form>
+			</div>
 		</div>
-	</div>
 </body>
 
 </html>

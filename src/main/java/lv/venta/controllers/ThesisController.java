@@ -6,10 +6,14 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.validation.Valid;
 import lv.venta.models.Area;
 import lv.venta.models.Complexity;
 import lv.venta.models.Thesis;
@@ -78,5 +82,25 @@ public class ThesisController {
 		return "thesis-add-page";
 	}
 
+	
+	@PostMapping("/addNew")
+	public String addNewThesis(@Valid @ModelAttribute Thesis thesis, BindingResult result, Model model) {
+	    if (!result.hasErrors()) {
+	        try {
+	        	thesisService.insertNewThesis(thesis.getTitleLv(), thesis.getTitleEn(), thesis.getAreas(), thesis.getComplexity(), 
+	        			thesis.getPublicNotes(), thesis.getSupervisor());
+	            return "redirect:/thesis/showAll/" + thesis.getSupervisor().getIdp();
+	        } catch (Exception e) {
+	            model.addAttribute("error", e.getMessage());
+	            return "error-page";
+	        }
+	    } else {
+	    	 ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicRepo.findAll();
+	         model.addAttribute("supervisors", supervisors);
+	         model.addAttribute("areas", areas);
+	         model.addAttribute("complexities", complexities);
+	        return "thesis-add-page";
+	    }
+	}
 	
 }

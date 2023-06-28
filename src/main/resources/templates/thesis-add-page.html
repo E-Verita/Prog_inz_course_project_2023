@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Add New Thesis</title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+
+</head>
+
+<body>
+	<h2>Add New Thesis</h2>
+	<form th:action="@{/thesis/save}" th:object="${thesis}" method="post">
+		<div class="container">
+
+			<table>
+				<tr>
+					<th>Title (LV):</th>
+					<td>
+						<input type="text" th:field="*{titleLv}" required>
+					</td>
+					<td th:if="${#fields.hasErrors('titleLv')}" th:errors="*{titleLv}"></td>
+				</tr>
+				<tr>
+					<th>Title (EN):</th>
+					<td>
+						<input type="text" th:field="*{titleEn}" required>
+					</td>
+					<td th:if="${#fields.hasErrors('titleEn')}" th:errors="*{titleEn}"></td>
+				</tr>
+				<tr>
+					<th>Areas:</th>
+					<td>
+						<select th:field="*{areas}" multiple="multiple">
+							<option th:each="area : ${areas}" th:value="${area}" th:text="${area}"></option>
+						</select>
+						<small>Select 1 or multiple areas</small>
+					</td>
+					<td th:if="${#fields.hasErrors('areas')}" th:errors="*{areas}"></td>
+				</tr>
+				<tr>
+				<tr>
+					<th>Complexity:</th>
+					<td>
+						<select th:field="*{complexity}">
+							<option th:each="complexity : ${complexities}" th:value="${complexity}"
+								th:text="${complexity}"></option>
+						</select>
+					</td>
+					<td th:if="${#fields.hasErrors('complexity')}" th:errors="*{complexity}"></td>
+				</tr>
+				<tr>
+				<tr>
+					<th>Public Notes:</th>
+					<td>
+						<textarea th:field="*{publicNotes}" required></textarea>
+					</td>
+					<td th:if="${#fields.hasErrors('publicNotes')}" th:errors="*{publicNotes}"></td>
+				</tr>
+
+
+				<tr>
+					<th>Supervisor:</th>
+					<td>
+						<select th:field="*{supervisor}" required>
+							<option value="">Select Supervisor</option>
+							<option th:each="person : ${supervisors}" th:value="${person.idp}"
+								th:text="${person.name + ' ' + person.surname}"></option>
+						</select>
+					</td>
+					<td th:if="${#fields.hasErrors('supervisor')}" th:errors="*{supervisor}"></td>
+				</tr>
+				<tr>
+					<td colspan="2"  align="center">
+						<button type="submit">Save</button>
+						<button type="button" onclick="location.href='/thesis/showAll'">Cancel</button>
+					</td>
+				</tr>
+			</table>
+			<div class="container">
+	</form>
+
+
+</body>
+
+</html>

@@ -54,9 +54,12 @@
                     <button type="button" onclick="location.href='/thesis/apply'">Cancel</button>
                 </form> -->
 
-				<form th:action="@{/application/addNew/{thesisId}(thesisId=${thesis.idt})}" method="post">
+				<form th:action="@{'/application/addNew/' + ${thesis.idt}}" method="get">
 					<button type="submit">Apply</button>
-					<button type="button" onclick="location.href='/thesis/apply'">Cancel</button>
+				</form>
+
+				<form th:action="@{/thesis/apply}" method="get">
+					<button type="submit">Cancel</button>
 				</form>
 			</div>
 		</div>

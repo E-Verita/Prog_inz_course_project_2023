@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 import lv.venta.models.Thesis;
@@ -33,23 +33,45 @@ public class ThesisApplicationController {
 	@Autowired
 	private IThesisService thesisService;
 
-	@PostMapping("/addNew/{thesisId}")
-	public String addNewApplications(@Valid @ModelAttribute ThesisApplication application, BindingResult result, 
-            @PathVariable("thesisId") long thesisId, Model model) throws Exception {
-		try {
-			Thesis thesis = thesisService.getThesisById(thesisId);
-			if (thesis == null) {
-				throw new Exception("Thesis not found with ID: " + thesisId);
-			}
-			application.setThesis(thesis);
-			ArrayList<Student> students = (ArrayList<Student>) studentService.findAll();
-			model.addAttribute("students", students);
-			model.addAttribute("thesis", thesis);
-			model.addAttribute("application", new ThesisApplication());
-			return "application-add-page";
-		} catch (Exception e) {
-			model.addAttribute("error", e.getMessage());
+	@GetMapping("/addNew/{thesisId}")
+	public String addNewApplication(@PathVariable("thesisId") long thesisId, Model model) throws Exception {
+		Thesis thesis = thesisService.getThesisById(thesisId);
+		if (thesis == null) {
+			model.addAttribute("error", "Thesis not found with ID: " + thesisId);
 			return "error-page";
 		}
+
+		ArrayList<Student> students = (ArrayList<Student>) studentService.findAll();
+		model.addAttribute("students", students);
+		model.addAttribute("thesis", thesis);
+		ThesisApplication application = new ThesisApplication();
+		application.setThesis(thesis);
+		model.addAttribute("application", application);
+
+		return "application-add-page";
 	}
+
+	@PostMapping("/addNew")
+	public String addNewThesisApplication( @Valid @ModelAttribute ThesisApplication application, BindingResult result, Model model) throws Exception {
+		if (!result.hasErrors()) {
+	        try {
+	            applicationService.insertNewThesisApplication(
+	                    application.getThesis(),
+	                    application.getStudent(),
+	                    application.getAim(),
+	                    application.getTasks()
+	            );
+	            return "redirect:/thesis/apply";
+	        } catch (Exception e) {
+	            model.addAttribute("error", e.getMessage());
+	            return "error-page";
+	        }
+	    } else {
+		    ArrayList<Student> students = (ArrayList<Student>) studentService.findAll();
+	        model.addAttribute("students", students);
+	        model.addAttribute("thesis", application.getThesis());
+	        return "application-add-page";
+	    }
+	}
+	
 }

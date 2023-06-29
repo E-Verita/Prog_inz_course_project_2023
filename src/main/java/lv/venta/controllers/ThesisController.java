@@ -106,6 +106,7 @@ public class ThesisController {
 	         model.addAttribute("complexities", complexities);
 	        return "thesis-add-page";
 	    }
+	    
 	}
 	
 	@GetMapping("/show/{id}")

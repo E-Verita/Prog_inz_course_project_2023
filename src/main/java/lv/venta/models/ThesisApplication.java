@@ -77,7 +77,6 @@ public class ThesisApplication {
     private ITFBoardMeeting boardMeeting;
 	
 	
-	@NotNull
 	@Column(name="status")
 	@Enumerated(EnumType.STRING)
 	private ProcessStatus status;
@@ -104,13 +103,14 @@ public class ThesisApplication {
 	private String ITFBoardNotesToStudent;
 
 	public ThesisApplication(Thesis thesis, Student student,  @NotNull @Size(min = 20, max = 200) String aim,
-			@NotNull @Size(min = 20, max = 500) String tasks, LocalDateTime applicationDate) {
+			@NotNull @Size(min = 20, max = 500) String tasks) {
 		super();
 		this.thesis = thesis;
 		this.student = student;
 		this.aim = aim;
 		this.tasks = tasks;
-		this.applicationDate = applicationDate;
+		this.status = ProcessStatus.waiting_on_approval_by_supervisor;
+		this.applicationDate = LocalDateTime.now();
 	}
 	
 	

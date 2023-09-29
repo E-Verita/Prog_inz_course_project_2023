@@ -9,7 +9,8 @@
 
 <body>
 	<h2>Add New Thesis</h2>
-	<form th:action="@{/thesis/addNew}" th:object="${thesis}" method="post">
+		<!-- <form th:action="@{/thesis/addNew}" th:object="${thesis}" method="post"> -->
+	<form th:action="@{/professor/addNew}" th:object="${thesis}" method="post">
 		<div class="container">
 			<table>
 				<tr>
@@ -74,7 +75,8 @@
 		</div>
 		<div align="center">
 				<button type="submit">Save</button>
-				<button type="button" onclick="location.href='/thesis/showAll'">Cancel</button>
+								<button type="button" onclick="location.href='/professor/showAll'">Cancel</button>
+			<!--	<button type="button" onclick="location.href='/thesis/showAll'">Cancel</button> -->
 			</div>
 	</form>
 </body>

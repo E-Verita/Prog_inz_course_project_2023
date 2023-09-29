@@ -21,7 +21,9 @@
                 <tr th:each="thesis : ${thesis}">
                     <td th:text="${thesis.idt}"></td>
                     <td><b>
-                        <a th:href="@{/thesis/apply/{id}(id=${thesis.idt})}" th:text="${thesis.titleLv}"></a>
+                       <!-- <a th:href="@{/thesis/apply/{id}(id=${thesis.idt})}" th:text="${thesis.titleLv}"></a> -->
+                        <a th:href="@{/student/apply/{id}(id=${thesis.idt})}" th:text="${thesis.titleLv}"></a>
+
                         </b>
                     </td>
                     <td th:text="${thesis.complexity}"></td>

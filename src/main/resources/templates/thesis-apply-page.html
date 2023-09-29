@@ -54,11 +54,15 @@
                     <button type="button" onclick="location.href='/thesis/apply'">Cancel</button>
                 </form> -->
 
-				<form th:action="@{'/application/addNew/' + ${thesis.idt}}" method="get">
+			<!--	<form th:action="@{'/application/addNew/' + ${thesis.idt}}" method="get"> -->
+				<form th:action="@{'/student/addNew/' + ${thesis.idt}}" method="get">
+
 					<button type="submit">Apply</button>
 				</form>
 
-				<form th:action="@{/thesis/apply}" method="get">
+				<form th:action="@{/student/apply}" method="get">
+				<!-- <form th:action="@{/thesis/apply}" method="get"> -->
+
 					<button type="submit">Cancel</button>
 				</form>
 			</div>

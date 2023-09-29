@@ -24,9 +24,9 @@ import lv.venta.services.IStudentService;
 import lv.venta.services.IThesisService;
 
 @Controller
-@RequestMapping("/thesis")
-public class ThesisController {
-
+@RequestMapping("/professor")
+public class ProfessorController {
+	
 	@Autowired
 	private IThesisService thesisService;
 	
@@ -39,14 +39,8 @@ public class ThesisController {
 	private ArrayList<Area> areas = new ArrayList<>(Arrays.asList(Area.values()));
 	private ArrayList<Complexity> complexities = new ArrayList<>(Arrays.asList(Complexity.values()));
 	
-	@GetMapping("/hello") 
-	public String helloFunc() {
-		System.out.println("Mans pirmais kontrolieris ir nostrādājis");
-		return "hello-page"; // tiks parādīta hello-page.html lapa
-	}
-	
 	@GetMapping("/showAll")
-	public String showAllTrips(Model model) {
+	public String showAllThesis(Model model) {
 	    try {
 	        ArrayList<Thesis> thesis = thesisService.selectAllThesis();
 	        if (thesis.isEmpty()) {
@@ -62,7 +56,7 @@ public class ThesisController {
 	}
 	
 	@GetMapping("/showAll/{id}")
-	public String showDriverById(@PathVariable long id, Model model) {
+	public String showThesisBSupervisorId(@PathVariable long id, Model model) {
 		try {
 	        ArrayList<Thesis> thesis = thesisService.selectAllThesisBySupervisor(id);
 	        if (thesis.isEmpty()) {
@@ -76,7 +70,8 @@ public class ThesisController {
 			return "error-page";
 		}
 	}
-	
+
+
 	@GetMapping("/addNew")
 	public String showAddThesisForm(Model model) throws Exception {
 		ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
@@ -94,7 +89,7 @@ public class ThesisController {
 	        try {
 	        	thesisService.insertNewThesis(thesis.getTitleLv(), thesis.getTitleEn(), thesis.getAreas(), thesis.getComplexity(), 
 	        			thesis.getPublicNotes(), thesis.getSupervisor());
-	            return "redirect:/thesis/showAll/" + thesis.getSupervisor().getIdp();
+	            return "redirect:/professor/showAll/" + thesis.getSupervisor().getIdp();
 	        } catch (Exception e) {
 	            model.addAttribute("error", e.getMessage());
 	            return "error-page";
@@ -129,7 +124,7 @@ public class ThesisController {
 		try {
 			thesisService.deleteThesisById(id);
 			model.addAttribute("thesis", thesisService.selectAllThesis());
-			return "redirect:/thesis/showAll";
+			return "redirect:/professor/showAll";
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 			return "error-page";
@@ -141,7 +136,7 @@ public class ThesisController {
 		try {
 			thesisService.deleteThesisById(id);
 			model.addAttribute("thesis", thesisService.selectAllThesis());
-			return "redirect:/thesis/showAll";
+			return "redirect:/professor/showAll";
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 			return "error-page";
@@ -173,45 +168,13 @@ public class ThesisController {
 	        try {
 	        	thesisService.updateThesisById(id, thesis.getTitleLv(), thesis.getTitleEn(), thesis.getAreas(), thesis.getComplexity(), 
 	        			thesis.getPrivateNotes(), thesis.getPublicNotes(), thesis.getAssignedStudent(), thesis.getSupervisor());
-	            return "redirect:/thesis/show/" + id;
+	            return "redirect:/professor/show/" + id;
 	        } catch (Exception e) {
 	            model.addAttribute("error", e.getMessage());
 	            return "error-page";
 	        }
 	    } else {
 	        return "driver-update-page";
-	    }
-	}
-
-	// STUDENTS - see all to apply
-	@GetMapping("/apply")
-	public String showAwailableThesis(Model model) throws Exception {
-		 try {
-		ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
-		ArrayList<Thesis> thesis = thesisService.selectAllByAssignedStudentIsNull();
-		model.addAttribute("searchedElement", "Application");
-		model.addAttribute("thesis", thesis);
-        model.addAttribute("supervisors", supervisors);
-		model.addAttribute("complexities", complexities);
-		return "thesis-all-apply-page";
-	} catch (Exception e) {
-        model.addAttribute("error", e.getMessage());
-        return "error-page";
-    }
-	}
-	
-	@GetMapping("/apply/{id}")
-	public String showThesisInformation(@PathVariable("id")  long id, Model model) {
-		try {
-	        Thesis thesis = thesisService.getThesisById(id);
-	        if (thesis == null) {
-	            throw new Exception("Thesis not found with ID: " + id);
-	        }
-	        model.addAttribute("thesis", thesis);
-	        return "thesis-apply-page";
-	    } catch (Exception e) {
-	        model.addAttribute("error", e.getMessage());
-	        return "error-page";
 	    }
 	}
 }

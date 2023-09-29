@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Add New Thesis</title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+	<h2>Add New Thesis</h2>
+	<form th:action="@{/thesis/addNew}" th:object="${thesis}" method="post">
+		<div class="container">
+			<table>
+				<tr>
+					<th>Title (LV):</th>
+					<td>
+						<input type="text" th:field="*{titleLv}" required>
+						<br>
+						<small th:errors="*{titleLv}"></small>
+					</td>
+				</tr>
+				<tr>
+					<th>Title (EN):</th>
+					<td>
+						<input type="text" th:field="*{titleEn}" required>
+						<br>
+						<small th:errors="*{titleEn}"></small>
+					</td>
+				</tr>
+				<tr>
+					<th>Areas:</th>
+					<td>
+						<select th:field="*{areas}" multiple="multiple">
+							<option th:each="area : ${areas}" th:value="${area}" th:text="${area}"></option>
+						</select>
+						<br>
+						<small th:errors="*{areas}"></small>
+					</td>
+				</tr>
+				<tr>
+					<th>Complexity:</th>
+					<td>
+						<select th:field="*{complexity}">
+							<option th:each="complexity : ${complexities}" th:value="${complexity}"
+								th:text="${complexity}"></option>
+						</select>
+						<br>
+						<small th:errors="*{complexity}"></small>
+					</td>
+				</tr>
+				<tr>
+					<th>Public Notes:</th>
+					<td>
+						<textarea th:field="*{publicNotes}" required></textarea>
+						<br>
+						<small th:errors="*{publicNotes}"></small>
+					</td>
+				</tr>
+				<tr>
+					<th>Supervisor:</th>
+					<td>
+						<select th:field="*{supervisor}" required>
+							<option value="">Select Supervisor</option>
+							<option th:each="person : ${supervisors}" th:value="${person.idp}"
+								th:text="${person.name + ' ' + person.surname}"></option>
+						</select>
+						<br>
+						<small th:errors="*{supervisor}"></small>
+					</td>
+				</tr>
+			</table>
+			
+		</div>
+		<div align="center">
+				<button type="submit">Save</button>
+				<button type="button" onclick="location.href='/thesis/showAll'">Cancel</button>
+			</div>
+	</form>
+</body>
+
+</html>

@@ -96,25 +96,12 @@ public class Thesis {
 	@JoinColumn(name="Ids")
 	private Student assignedStudent;
 	
-	@ManyToMany(mappedBy="appliedThesis")
-	private Collection <Student> studentsApplied = new ArrayList<>();
 	
 	@ManyToOne
 	@JoinColumn(name = "Ida")
 	private AcademicPersonel supervisor;
 		
-	public void addStudent(Student student) {
-		if(!studentsApplied.contains(student)) {
-			studentsApplied.add(student);
-		}
-	}
-	
-	public void removeStudent(Student student) {
-		if(studentsApplied.contains(student)) {
-			studentsApplied.remove(student);
-		}
-	}
-	
+		
 	@ManyToMany
 	@JoinTable(name = "thesis_reviewers",
 	joinColumns = @JoinColumn(name = "Idt"),

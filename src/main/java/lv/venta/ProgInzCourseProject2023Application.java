@@ -76,7 +76,7 @@ public class ProgInzCourseProject2023Application {
 						Level.first_level, 4, 4, 2023, 2024);
 				programRepo.save(idsp1);
 
-				Student ids1 = new Student("Students", "Pirmais", "111111-11111", idu3, "sp01234", false,
+				Student ids1 = new Student("Students", "Pirmais", "111111-11111", idu4, "sp01234", false,
 						LocalDate.of(1991, 10, 4), AcademicStatus.studying, false, idsp1);
 				Student ids2 = new Student("Students", "Otrais", "222222-22222", idu5, "sp01234", false,
 						LocalDate.of(1991, 01, 1), AcademicStatus.studying, false, idsp1);

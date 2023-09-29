@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thesis List</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+    <h1>Thesis List for <span th:text="${searchedElement}"></span></h1>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Thesis ID</th>
+                    <th>Title (LV)</th>
+                    <th>Complexity</th>
+                    <th>Supervisor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="thesis : ${thesis}">
+                    <td th:text="${thesis.idt}"></td>
+                    <td><b>
+                        <a th:href="@{/thesis/apply/{id}(id=${thesis.idt})}" th:text="${thesis.titleLv}"></a>
+                        </b>
+                    </td>
+                    <td th:text="${thesis.complexity}"></td>
+                    <td th:text="${thesis.supervisor.name + ' ' + thesis.supervisor.surname + ' (' + thesis.supervisor.degree + ')'}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div th:if="${error}" style="color: red;">
+            <p th:text="${error}"></p>
+        </div>
+       
+    </div>
+
+</body>
+</html>

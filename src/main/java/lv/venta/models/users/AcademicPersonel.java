@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -24,7 +25,7 @@ import lv.venta.models.Thesis;
 @Getter
 @Setter
 @NoArgsConstructor
-@AttributeOverride(name="Idp", column = @Column(name="Ida"))
+@PrimaryKeyJoinColumn(name = "Ida", referencedColumnName = "Idp")
 public class AcademicPersonel extends Person{
 	
 	@Column(name="Degree")

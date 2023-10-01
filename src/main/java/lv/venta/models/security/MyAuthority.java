@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lv.venta.models.users.User;
 
 @Table(name="MyAuthority")
 @Entity
@@ -45,7 +46,7 @@ public class MyAuthority {
 	@JoinTable(name="Users_Authorities",
 	joinColumns = @JoinColumn(name="MyAuthorityId"),
 	inverseJoinColumns = @JoinColumn(name="MyUserId"))
-	private Collection <MyUser> users = new ArrayList <>();
+	private Collection <User> users = new ArrayList <>();
 	
 	
 	
@@ -61,13 +62,13 @@ public class MyAuthority {
 		this.title = title;
 	}
 
-	public void addUser(MyUser user) {
+	public void addUser(User user) {
 		if(!users.contains(user)) {
 			users.add(user);
 		}
 	}
 
-	public void removeUser(MyUser user) {
+	public void removeUser(User user) {
 		if(users.contains(user)) {
 			users.remove(user);
 		}

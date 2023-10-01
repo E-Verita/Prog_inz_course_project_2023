@@ -18,7 +18,6 @@ import lv.venta.models.StudyProgram;
 import lv.venta.models.StudyType;
 import lv.venta.models.Thesis;
 import lv.venta.models.security.MyAuthority;
-import lv.venta.models.security.MyUser;
 import lv.venta.models.users.AcademicPersonel;
 import lv.venta.models.users.AcademicStatus;
 import lv.venta.models.users.Degree;
@@ -48,18 +47,18 @@ public class ProgInzCourseProject2023Application {
 	public CommandLineRunner testModel(IUserRepo userRepo, IAcademicPersonelRepo personelRepo, IStudentRepo studentRepo,
 			IPersonRepo personRepo, ICommentRepo commentRepo, IITFBoardMeetingRepo meetingRepo,
 			IMeetingMemberRepo memberRepo, IStudyProgramRepo programRepo, IThesisRepo thesisRepo,
-			IThesisApplicationRepo applicationRepo) {
+			IThesisApplicationRepo applicationRepo, IMyAuthorityRepo authorityRepo) {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
-				User idu1 = new User("123", "karina.krinkele@venta.lv");
-				User idu2 = new User("123", "karlis.immers@venta.lv");
-				User idu3 = new User("123", "estere.vitola@ventalv");
+				User idu1 = new User("Karina", "Skirmante", passwordEncoderSimple().encode("123"));
+				User idu2 = new User("Karlis", "Immers", passwordEncoderSimple().encode("123"));
+				User idu3 = new User("Estere", "Vitola", passwordEncoderSimple().encode("123"));
 
-				User idu4 = new User("123", "students.pirmais@venta.lv");
-				User idu5 = new User("123", "studente.otra@venta.lv");
-				User idu6 = new User("123", "studente.tresa@venta.lv");
-				User idu7 = new User("123", "studente.ceturta@venta.lv");
+				User idu4 = new User("Students", "Pirmais", passwordEncoderSimple().encode("123"));
+				User idu5 = new User("Students", "Otrais", passwordEncoderSimple().encode("123"));
+				User idu6 = new User("Students", "Tresais", passwordEncoderSimple().encode("123"));
+				User idu7 = new User("Students", "Ceturtais", passwordEncoderSimple().encode("123"));
 
 				userRepo.save(idu1);
 				userRepo.save(idu2);
@@ -77,6 +76,39 @@ public class ProgInzCourseProject2023Application {
 				personRepo.save(ida2);
 				personRepo.save(ida3);
 
+				// --- security ----
+
+				MyAuthority auth1 = new MyAuthority("STUDENT");
+				MyAuthority auth2 = new MyAuthority("PROFESSOR");
+
+				auth1.addUser(idu4);
+				auth1.addUser(idu5);
+				auth1.addUser(idu6);
+				auth1.addUser(idu7);
+				auth2.addUser(idu1);
+				auth2.addUser(idu2);
+				auth2.addUser(idu3);
+				authorityRepo.save(auth1);
+				authorityRepo.save(auth2);
+
+				idu4.addAuthority(auth1);
+				idu5.addAuthority(auth1);
+				idu6.addAuthority(auth1);
+				idu7.addAuthority(auth1);
+				idu1.addAuthority(auth2);
+				idu2.addAuthority(auth2);
+				idu3.addAuthority(auth2);
+
+				userRepo.save(idu1);
+				userRepo.save(idu2);
+				userRepo.save(idu3);
+				userRepo.save(idu4);
+				userRepo.save(idu5);
+				userRepo.save(idu6);
+				userRepo.save(idu7);
+
+				// --- ----
+
 				StudyProgram idsp1 = new StudyProgram("Programmēšanas speciālists", ida3, StudyType.professional,
 						Level.first_level, 4, 4, 2023, 2024);
 				programRepo.save(idsp1);
@@ -85,7 +117,7 @@ public class ProgInzCourseProject2023Application {
 						LocalDate.of(1991, 10, 4), AcademicStatus.studying, false, idsp1);
 				Student ids2 = new Student("Students", "Otrais", "222222-22222", idu5, "sp01234", false,
 						LocalDate.of(1991, 01, 1), AcademicStatus.studying, false, idsp1);
-				Student ids3 = new Student("Students", "Trešais", "333333-33333", idu6, "sp56789", false,
+				Student ids3 = new Student("Students", "Tresais", "333333-33333", idu6, "sp56789", false,
 						LocalDate.of(1998, 07, 4), AcademicStatus.studying, false, idsp1);
 				Student ids4 = new Student("Students", "Ceturtais", "444444-44444", idu7, "sp24680", false,
 						LocalDate.of(2002, 04, 5), AcademicStatus.studying, false, idsp1);
@@ -113,13 +145,12 @@ public class ProgInzCourseProject2023Application {
 						Arrays.asList(Area.security, Area.development), Complexity.average,
 						"Kvalifikācijas darbā tiks pētīti un analizēti dažādi digitālās identitātes pārvaldības risinājumi, to priekšrocības un iespējamās problēmas. Tiks aplūkotas dažādas tehnoloģijas, protokoli un standarti, kas tiek izmantoti digitālās identitātes pārvaldībā, kā arī to pielietojums dažādās nozarēs un lietojumprogrammās. Galvenais mērķis ir izstrādāt ieteikumus un vadlīnijas digitālās identitātes pārvaldības risinājumu ieviešanai un uzlabošanai.",
 						ida1);
-				
+
 				Thesis idt4 = new Thesis("Sociālo tīklu ietekme uz sabiedrību un indivīdu privātumu",
-                        "The impact of social networks on society and individual privacy",
-                        Arrays.asList(Area.social, Area.privacy),
-                        Complexity.very_complex,
-                        "The qualification work will investigate the influence of social networks on society and the implications for individual privacy. It will analyze the effects of social media platforms on social interactions, communication patterns, and information sharing. The work will examine the privacy concerns associated with the collection, storage, and sharing of personal data on social networks and explore the ethical and legal considerations related to privacy protection. The main objective is to propose strategies for individuals and organizations to enhance privacy and mitigate the negative consequences of social network usage.",
-                        ida1);
+						"The impact of social networks on society and individual privacy",
+						Arrays.asList(Area.social, Area.privacy), Complexity.very_complex,
+						"The qualification work will investigate the influence of social networks on society and the implications for individual privacy. It will analyze the effects of social media platforms on social interactions, communication patterns, and information sharing. The work will examine the privacy concerns associated with the collection, storage, and sharing of personal data on social networks and explore the ethical and legal considerations related to privacy protection. The main objective is to propose strategies for individuals and organizations to enhance privacy and mitigate the negative consequences of social network usage.",
+						ida1);
 
 				Thesis idt5 = new Thesis("Biometriskās identifikācijas tehnoloģijas un to drošības aspekti",
 						"Biometric identification technologies and their security aspects",
@@ -144,7 +175,7 @@ public class ProgInzCourseProject2023Application {
 						Arrays.asList(Area.analytics, Area.business), Complexity.easy,
 						"The qualification work will investigate the utilization of data analysis methods in the context of business decision-making. It will explore various data analysis techniques, such as statistical analysis, machine learning, and data visualization, and their application in solving business problems. The work will involve collecting and analyzing real-world business data and using appropriate data analysis tools to derive insights and support decision-making processes. The main goal is to provide recommendations for the effective use of data analysis methods in business environments.",
 						ida2);
-				
+
 				thesisRepo.save(idt1);
 				thesisRepo.save(idt2);
 				thesisRepo.save(idt3);
@@ -153,49 +184,16 @@ public class ProgInzCourseProject2023Application {
 				thesisRepo.save(idt6);
 				thesisRepo.save(idt7);
 				thesisRepo.save(idt8);
-				
-				
-				
-				
+
 			}
 
 		};
 
 	}
 
-	
 	@Bean
 	public PasswordEncoder passwordEncoderSimple() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
 
-	@Bean
-	public CommandLineRunner testDB(IMyUserRepo userRepo, IMyAuthorityRepo authorityRepo) {
-		return new CommandLineRunner() {
-
-			@Override
-			public void run(String... args) throws Exception {
-
-				MyUser user1 = new MyUser("Everita", "Vecberza", passwordEncoderSimple().encode("123"));
-				userRepo.save(user1);
-
-				MyUser user2 = new MyUser("Janis", "Berzins", passwordEncoderSimple().encode("321"));
-				userRepo.save(user2);
-
-				MyAuthority auth1 = new MyAuthority("STUDENT");
-				MyAuthority auth2 = new MyAuthority("PROFESSOR");
-
-				auth1.addUser(user1); // Everita kā student
-				auth2.addUser(user2); // Janis kā PROFESSOR
-				authorityRepo.save(auth1);
-				authorityRepo.save(auth2);
-
-				user1.addAuthority(auth1);
-				user2.addAuthority(auth2);
-				userRepo.save(user1);
-				userRepo.save(user2);
-
-			}
-		};
-	}
 }

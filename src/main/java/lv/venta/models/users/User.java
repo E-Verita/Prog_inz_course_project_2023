@@ -1,12 +1,15 @@
 package lv.venta.models.users;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -17,6 +20,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lv.venta.models.security.MyAuthority;
 
 
 @Table(name="user_table")
@@ -26,30 +30,50 @@ import lombok.Setter;
 @NoArgsConstructor
 public class User {
 
-	@Setter(value=AccessLevel.NONE)
-	@Column(name="Idu")
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long idu;
-	
-	@Column(name="Pasword")
-	@NotNull
-	//TODO:Papildināt ar validāciju, kad ir zināms enkodētajs
-	private String password; //TODO: kad rudenī Pievienos Spring Security, tad jauzliek password Encoder
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "MyUserId")
+    private int myUserId;
+    
+    @Column(name = "Name")
+    @NotNull
+    @Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\\\ ]+")
+    private String name;
+    
+    
+    @NotNull
+    @Column(name = "Surname")
+    @Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\\\ ]+")
+    private String surname;
+    
+    @NotNull
+    @Column(name = "Username")
+    private String username;
+    
+    @NotNull
+    @Column(name = "Password")
+    private String password;
 
-	@Column(name="Email")
-	@NotNull
-	@Email
-	private String email;
-
-	
-	@OneToOne(mappedBy="user")
-	private Person person;
-	
-	
-	public User(@NotNull String password, @NotNull @Email String email) {
-		this.password = password;
-		this.email = email;
-	}
-	
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    private Collection<MyAuthority> authorities = new ArrayList<>();
+    
+    
+    
+    public User(String name, String surname, String password) {
+            setName(name);
+            setSurname(surname);
+            setPassword(password);
+            username = name.toLowerCase() + "." + surname.toLowerCase();
+    }
+    
+    public void addAuthority(MyAuthority authority) {
+            if(!authorities.contains(authority)) {
+                    authorities.add(authority);
+            }
+    }
+     public void removeAuthority(MyAuthority authority) {
+             if(authorities.contains(authority)) {
+                     authorities.remove(authority);
+             }
+     }
 }

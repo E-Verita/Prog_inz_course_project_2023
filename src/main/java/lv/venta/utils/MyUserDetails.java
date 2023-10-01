@@ -9,13 +9,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lv.venta.models.security.MyAuthority;
-import lv.venta.models.security.MyUser;
+import lv.venta.models.users.User;
 
 public class MyUserDetails implements UserDetails {
 
-	private MyUser user;
+	private User user;
 
-	public MyUserDetails(MyUser user) {
+	public MyUserDetails(User user) {
 		this.user = user;
 	}
 
@@ -61,7 +61,7 @@ public class MyUserDetails implements UserDetails {
 		return true;
 	}
 
-	public MyUser getUser() {
+	public User getUser() {
 		return user;
 	}
 

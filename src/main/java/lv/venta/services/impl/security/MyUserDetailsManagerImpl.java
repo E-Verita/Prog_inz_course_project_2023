@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
 
-import lv.venta.models.security.MyUser;
+import lv.venta.models.users.User;
 import lv.venta.repo.security.IMyUserRepo;
 import lv.venta.utils.MyUserDetails;
 
@@ -16,7 +16,7 @@ public class MyUserDetailsManagerImpl implements UserDetailsManager {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		MyUser user = userRepo.findByUsername(username);
+		User user = userRepo.findByUsername(username);
 		if (user != null) {
 			MyUserDetails details = new MyUserDetails(user);
 			return details;
@@ -28,7 +28,7 @@ public class MyUserDetailsManagerImpl implements UserDetailsManager {
 	@Override
 	public void createUser(UserDetails user) {
 		MyUserDetails myDetails = (MyUserDetails) user;
-		MyUser myUser = myDetails.getUser();
+		User myUser = myDetails.getUser();
 		
 		userRepo.save(myUser);		
 
@@ -37,7 +37,7 @@ public class MyUserDetailsManagerImpl implements UserDetailsManager {
 	@Override
 	public void updateUser(UserDetails user) {
 		MyUserDetails myDetails = (MyUserDetails) user;
-		MyUser myUser = myDetails.getUser();
+		User myUser = myDetails.getUser();
 		
 		userRepo.save(myUser);		
 
@@ -45,7 +45,7 @@ public class MyUserDetailsManagerImpl implements UserDetailsManager {
 
 	@Override
 	public void deleteUser(String username) {
-		MyUser user = userRepo.findByUsername(username);
+		User user = userRepo.findByUsername(username);
 		if(user!=null) {
 			userRepo.delete(user);
 		}
@@ -60,7 +60,7 @@ public class MyUserDetailsManagerImpl implements UserDetailsManager {
 
 	@Override
 	public boolean userExists(String username) {
-		MyUser user = userRepo.findByUsername(username);
+		User user = userRepo.findByUsername(username);
 		if (user != null) {
 			return true;
 		}

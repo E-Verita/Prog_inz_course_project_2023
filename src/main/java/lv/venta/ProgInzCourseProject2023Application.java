@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lv.venta.models.Area;
 import lv.venta.models.Complexity;
@@ -15,11 +17,15 @@ import lv.venta.models.Level;
 import lv.venta.models.StudyProgram;
 import lv.venta.models.StudyType;
 import lv.venta.models.Thesis;
+import lv.venta.models.security.MyAuthority;
+import lv.venta.models.security.MyUser;
 import lv.venta.models.users.AcademicPersonel;
 import lv.venta.models.users.AcademicStatus;
 import lv.venta.models.users.Degree;
 import lv.venta.models.users.Student;
 import lv.venta.models.users.User;
+import lv.venta.repo.security.IMyAuthorityRepo;
+import lv.venta.repo.security.IMyUserRepo;
 import lv.venta.repos.ICommentRepo;
 import lv.venta.repos.IITFBoardMeetingRepo;
 import lv.venta.repos.IMeetingMemberRepo;
@@ -44,7 +50,6 @@ public class ProgInzCourseProject2023Application {
 			IMeetingMemberRepo memberRepo, IStudyProgramRepo programRepo, IThesisRepo thesisRepo,
 			IThesisApplicationRepo applicationRepo) {
 		return new CommandLineRunner() {
-
 			@Override
 			public void run(String... args) throws Exception {
 				User idu1 = new User("123", "karina.krinkele@venta.lv");
@@ -158,4 +163,39 @@ public class ProgInzCourseProject2023Application {
 
 	}
 
+	
+	@Bean
+	public PasswordEncoder passwordEncoderSimple() {
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	}
+
+	@Bean
+	public CommandLineRunner testDB(IMyUserRepo userRepo, IMyAuthorityRepo authorityRepo) {
+		return new CommandLineRunner() {
+
+			@Override
+			public void run(String... args) throws Exception {
+
+				MyUser user1 = new MyUser("Everita", "Vecberza", passwordEncoderSimple().encode("123"));
+				userRepo.save(user1);
+
+				MyUser user2 = new MyUser("Janis", "Berzins", passwordEncoderSimple().encode("321"));
+				userRepo.save(user2);
+
+				MyAuthority auth1 = new MyAuthority("STUDENT");
+				MyAuthority auth2 = new MyAuthority("PROFESSOR");
+
+				auth1.addUser(user1); // Everita kā student
+				auth2.addUser(user2); // Janis kā PROFESSOR
+				authorityRepo.save(auth1);
+				authorityRepo.save(auth2);
+
+				user1.addAuthority(auth1);
+				user2.addAuthority(auth2);
+				userRepo.save(user1);
+				userRepo.save(user2);
+
+			}
+		};
+	}
 }

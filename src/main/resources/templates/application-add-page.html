@@ -8,6 +8,10 @@
 </head>
 
 <body>
+	<nav>
+		<button type="button" onclick="location.href='/logout'"
+			style="position: absolute; top: 10px; right: 10px;">Logout</button>
+	</nav>
 	<h2>New Thesis Application</h2>
 	<div class="container">
 		<table>
@@ -46,8 +50,8 @@
 		</table>
 	</div>
 	<div class="container">
-<form th:action="@{'/student/addNew/'}"  th:object="${application}" method="post">
-<!--<form th:action="@{'/application/addNew/'}"  th:object="${application}" method="post">  -->
+		<form th:action="@{'/student/addNew/'}" th:object="${application}" method="post">
+			<!--<form th:action="@{'/application/addNew/'}"  th:object="${application}" method="post">  -->
 
 			<table>
 				<tr>
@@ -55,7 +59,7 @@
 					<td>
 						<textarea id="aim" name="aim" rows="" cols="50" required th:field="*{aim}"></textarea>
 						<br>
-							<small th:errors="*{aim}" class="error"></small>
+						<small th:errors="*{aim}" class="error"></small>
 					</td>
 				</tr>
 				<tr>
@@ -63,7 +67,7 @@
 					<td>
 						<textarea id="tasks" name="tasks" rows="8" cols="50" required th:field="*{tasks}"></textarea>
 						<br>
-							<small th:errors="*{tasks}" class="error"></small>
+						<small th:errors="*{tasks}" class="error"></small>
 					</td>
 				</tr>
 				<tr>
@@ -75,7 +79,7 @@
 								th:text="${student.name + ' ' + student.surname}"></option>
 						</select>
 						<br>
-							<small th:errors="*{student}" class="error"></small>
+						<small th:errors="*{student}" class="error"></small>
 					</td>
 				</tr>
 			</table>

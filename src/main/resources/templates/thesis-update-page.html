@@ -8,6 +8,10 @@
 </head>
 
 <body>
+	<nav>
+		<button type="button" onclick="location.href='/logout'"
+			style="position: absolute; top: 10px; right: 10px;">Logout</button>
+	</nav>
 	<h2>Update Thesis</h2>
 	<!--<form th:action="@{/thesis/update/{id}(id=${thesis.idt})}" th:object="${thesis}" method="post"> -->
 	<form th:action="@{/professor/update/{id}(id=${thesis.idt})}" th:object="${thesis}" method="post">
@@ -92,13 +96,13 @@
 					</td>
 				</tr>
 			</table>
-			</div>
-			<div align="center">
+		</div>
+		<div align="center">
 
-				<button type="submit">Update</button>
-				<!-- <button type="button" onclick="location.href='/professor/showAll'">Cancel</button> -->
-				<button type="button" onclick="location.href='/thesis/showAll'">Cancel</button>
-			</div>
+			<button type="submit">Update</button>
+			<!-- <button type="button" onclick="location.href='/thesis/showAll'">Cancel</button> -->
+			<button type="button" onclick="location.href='/professor/showAll'">Cancel</button>
+		</div>
 	</form>
 </body>
 

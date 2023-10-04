@@ -14,8 +14,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lv.venta.services.impl.security.MyUserDetailsManagerImpl;
 
-@Configuration // klases pamatdoma ir sakonfigurēt sistēmu
-@EnableWebSecurity //
+
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     // userDetailsManager - nodrošin?t lietot?jus un to lomas
@@ -52,9 +53,10 @@ public class SecurityConfig {
 			.requestMatchers("/student/**").hasAnyAuthority("STUDENT")
 			.requestMatchers("/professor/**").hasAnyAuthority("PROFESSOR")
 			.requestMatchers("/error").permitAll().and()
-			.formLogin().permitAll().and().logout().permitAll();
-
+			.formLogin().permitAll().and().logout().permitAll().and().exceptionHandling();
 		return http.build();
 	}
+	
+	
 
 }

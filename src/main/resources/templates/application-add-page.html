@@ -50,7 +50,7 @@
 		</table>
 	</div>
 	<div class="container">
-		<form th:action="@{'/student/addNew/'}" th:object="${application}" method="post">
+<form th:action="@{'/student/addNew/' + ${thesis.idt}}" th:object="${application}" method="post">
 			<!--<form th:action="@{'/application/addNew/'}"  th:object="${application}" method="post">  -->
 
 			<table>
@@ -84,7 +84,7 @@
 				</tr>
 			</table>
 			<div align="center">
-				<input type="hidden" id="thesis" name="thesis" th:value="${thesis}" />
+				<input type="hidden" id="thesis.idt" name="thesis.idt" th:value="${thesis.idt}" />
 				<button type="submit">Submit Application</button>
 				<button type="button" onclick="location.href='/student/apply'">Cancel</button>
 				<!-- <button type="button" onclick="location.href='/thesis/apply'">Cancel</button> -->

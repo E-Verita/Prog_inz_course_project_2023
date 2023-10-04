@@ -56,7 +56,7 @@ public class ThesisApplication {
 	
 	@NotNull
 	@Column(name="aim")
-	@Size(min=20,max=200)
+	@Size(min=20,max=1000)
 	private String aim;
 
 	@NotNull
@@ -81,7 +81,6 @@ public class ThesisApplication {
 	@Enumerated(EnumType.STRING)
 	private ProcessStatus status;
 	
-	@NotNull
 	@Column(name="doc") // lēmums
 	@Size(min=5,max=500)
 	private String doc;
@@ -101,6 +100,7 @@ public class ThesisApplication {
 	@Column(name="ITFBoardNotesToStudent")
 	@Size(min=20,max=200)
 	private String ITFBoardNotesToStudent;
+
 
 	public ThesisApplication(Thesis thesis, Student student,  @NotNull @Size(min = 20, max = 200) String aim,
 			@NotNull @Size(min = 20, max = 500) String tasks) {

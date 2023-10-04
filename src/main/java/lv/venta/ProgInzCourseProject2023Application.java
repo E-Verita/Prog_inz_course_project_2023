@@ -42,7 +42,7 @@ public class ProgInzCourseProject2023Application {
 	public static void main(String[] args) {
 		SpringApplication.run(ProgInzCourseProject2023Application.class, args);
 	}
-
+/*
 	@Bean // izsauks funkciju automātiski, kad sistēma tiks startēta
 	public CommandLineRunner testModel(IUserRepo userRepo, IAcademicPersonelRepo personelRepo, IStudentRepo studentRepo,
 			IPersonRepo personRepo, ICommentRepo commentRepo, IITFBoardMeetingRepo meetingRepo,
@@ -195,5 +195,5 @@ public class ProgInzCourseProject2023Application {
 	public PasswordEncoder passwordEncoderSimple() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
-
+*/
 }

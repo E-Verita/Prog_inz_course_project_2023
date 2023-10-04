@@ -28,10 +28,9 @@ import lv.venta.services.IThesisService;
 @Controller
 @RequestMapping("/student")
 public class StudentController {
-	
 
 	@Autowired
-    private IAcademicPersonelService academicService;
+	private IAcademicPersonelService academicService;
 
 	@Autowired
 	private IThesisAplicationService applicationService;
@@ -41,43 +40,41 @@ public class StudentController {
 
 	@Autowired
 	private IThesisService thesisService;
-	
-	
+
 	private ArrayList<Area> areas = new ArrayList<>(Arrays.asList(Area.values()));
 	private ArrayList<Complexity> complexities = new ArrayList<>(Arrays.asList(Complexity.values()));
-	
 
 	@GetMapping("/apply")
 	public String showAwailableThesis(Model model) throws Exception {
-		 try {
-		ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
-		ArrayList<Thesis> thesis = thesisService.selectAllByAssignedStudentIsNull();
-		model.addAttribute("searchedElement", "Application");
-		model.addAttribute("thesis", thesis);
-        model.addAttribute("supervisors", supervisors);
-		model.addAttribute("complexities", complexities);
-		return "thesis-all-apply-page";
-	} catch (Exception e) {
-        model.addAttribute("error", e.getMessage());
-        return "error-page";
-    }
-	}
-	
-	@GetMapping("/apply/{id}")
-	public String showThesisInformation(@PathVariable("id")  long id, Model model) {
 		try {
-	        Thesis thesis = thesisService.getThesisById(id);
-	        if (thesis == null) {
-	            throw new Exception("Thesis not found with ID: " + id);
-	        }
-	        model.addAttribute("thesis", thesis);
-	        return "thesis-apply-page";
-	    } catch (Exception e) {
-	        model.addAttribute("error", e.getMessage());
-	        return "error-page";
-	    }
+			ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
+			ArrayList<Thesis> thesis = thesisService.selectAllByAssignedStudentIsNull();
+			model.addAttribute("searchedElement", "Application");
+			model.addAttribute("thesis", thesis);
+			model.addAttribute("supervisors", supervisors);
+			model.addAttribute("complexities", complexities);
+			return "thesis-all-apply-page";
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+			return "error-page";
+		}
 	}
-	
+
+	@GetMapping("/apply/{id}")
+	public String showThesisInformation(@PathVariable("id") long id, Model model) {
+		try {
+			Thesis thesis = thesisService.getThesisById(id);
+			if (thesis == null) {
+				throw new Exception("Thesis not found with ID: " + id);
+			}
+			model.addAttribute("thesis", thesis);
+			return "thesis-apply-page";
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+			return "error-page";
+		}
+	}
+
 	@GetMapping("/addNew/{thesisId}")
 	public String addNewApplication(@PathVariable("thesisId") long thesisId, Model model) throws Exception {
 		Thesis thesis = thesisService.getThesisById(thesisId);
@@ -85,37 +82,57 @@ public class StudentController {
 			model.addAttribute("error", "Thesis not found with ID: " + thesisId);
 			return "error-page";
 		}
-
+		System.out.println(thesis);
 		ArrayList<Student> students = (ArrayList<Student>) studentService.findAll();
 		model.addAttribute("students", students);
 		model.addAttribute("thesis", thesis);
 		ThesisApplication application = new ThesisApplication();
 		application.setThesis(thesis);
+		System.out.println(application);
 		model.addAttribute("application", application);
 
 		return "application-add-page";
 	}
 
-	@PostMapping("/addNew")
-	public String addNewThesisApplication( @Valid @ModelAttribute ThesisApplication application, BindingResult result, Model model) throws Exception {
+	@PostMapping("/addNew/{thesisId}")
+	public String addNewThesisApplication(@Valid @ModelAttribute ThesisApplication application, @PathVariable("thesisId") long thesisId, BindingResult result,
+			Model model) throws Exception {
+		Thesis thesis = thesisService.getThesisById(thesisId);
+	    application.setThesis(thesis);
+		System.out.println("0: " + application.getThesis() + "\n" + application.getStudent() + "\n"
+				+ application.getAim() + "\n" + application.getTasks());
 		if (!result.hasErrors()) {
-	        try {
-	            applicationService.insertNewThesisApplication(
-	                    application.getThesis(),
-	                    application.getStudent(),
-	                    application.getAim(),
-	                    application.getTasks()
-	            );
-	            return "redirect:/thesis/apply";
-	        } catch (Exception e) {
-	            model.addAttribute("error", e.getMessage());
-	            return "error-page";
-	        }
-	    } else {
-		    ArrayList<Student> students = (ArrayList<Student>) studentService.findAll();
-	        model.addAttribute("students", students);
-	        model.addAttribute("thesis", application.getThesis());
-	        return "application-add-page";
-	    }
+			try {
+				applicationService.insertNewThesisApplication(application.getThesis(), application.getStudent(),
+						application.getAim(), application.getTasks());
+				// 1
+				System.out.println( "1: " + application.getThesis() + "\n" + application.getStudent() + "\n"
+						+ application.getAim() + "\n" + application.getTasks());
+				// return "redirect:/thesis/apply";
+				return "redirect:/student/application";
+
+			} catch (Exception e) {
+				//2
+				System.out.println("2: " + application.getThesis() + "\n" + application.getStudent() + "\n"
+						+ application.getAim() + "\n" + application.getTasks());
+				model.addAttribute("error", e.getMessage());
+				return "error-page";
+			}
+		} else {
+			//3
+			System.out.println("3: " +  application.getStudent() + "\n"
+					+ application.getAim() + "\n" + application.getTasks());
+			ArrayList<Student> students = (ArrayList<Student>) studentService.findAll();
+			model.addAttribute("students", students);
+			model.addAttribute("thesis", application.getThesis());
+	        model.addAttribute("application", application);
+			return "application-add-page";
+		}
 	}
+
+	@GetMapping("/application")
+	public String applicationSuccessful(Model model) throws Exception {
+		return "landing-page";
+	}
+
 }

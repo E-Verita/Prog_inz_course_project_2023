@@ -142,3 +142,13 @@ input[type="text"],
             padding: 8px;
             font-size: 80%;
         }
+        
+.flag-icon-class-for-uk {
+    /* Add styles for the UK flag icon */
+    /* You can use background-image, font-size, etc. to style the icon */
+}
+
+.flag-icon-class-for-latvia {
+    /* Add styles for the Latvian flag icon */
+    /* You can use background-image, font-size, etc. to style the icon */
+}

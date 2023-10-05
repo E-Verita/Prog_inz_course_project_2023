@@ -52,7 +52,8 @@ public class SecurityConfig {
 		http.authorizeHttpRequests().requestMatchers("/hello").permitAll()
 			.requestMatchers("/student/**").hasAnyAuthority("STUDENT")
 			.requestMatchers("/professor/**").hasAnyAuthority("PROFESSOR")
-			.requestMatchers("/error").permitAll().and()
+			.requestMatchers("/error").permitAll()
+			.requestMatchers("/hello/**").permitAll().and()
 			.formLogin().permitAll().and().logout().permitAll().and().exceptionHandling();
 		return http.build();
 	}

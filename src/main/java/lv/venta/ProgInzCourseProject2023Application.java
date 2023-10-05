@@ -1,47 +1,39 @@
 package lv.venta;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Locale;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import lv.venta.models.Area;
-import lv.venta.models.Complexity;
-import lv.venta.models.Level;
-import lv.venta.models.StudyProgram;
-import lv.venta.models.StudyType;
-import lv.venta.models.Thesis;
-import lv.venta.models.security.MyAuthority;
-import lv.venta.models.users.AcademicPersonel;
-import lv.venta.models.users.AcademicStatus;
-import lv.venta.models.users.Degree;
-import lv.venta.models.users.Student;
-import lv.venta.models.users.User;
-import lv.venta.repo.security.IMyAuthorityRepo;
-import lv.venta.repo.security.IMyUserRepo;
-import lv.venta.repos.ICommentRepo;
-import lv.venta.repos.IITFBoardMeetingRepo;
-import lv.venta.repos.IMeetingMemberRepo;
-import lv.venta.repos.IStudyProgramRepo;
-import lv.venta.repos.IThesisApplicationRepo;
-import lv.venta.repos.IThesisRepo;
-import lv.venta.repos.users.IAcademicPersonelRepo;
-import lv.venta.repos.users.IPersonRepo;
-import lv.venta.repos.users.IStudentRepo;
-import lv.venta.repos.users.IUserRepo;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @SpringBootApplication
-public class ProgInzCourseProject2023Application {
+public class ProgInzCourseProject2023Application implements WebMvcConfigurer {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		SpringApplication.run(ProgInzCourseProject2023Application.class, args);
+	} */
+	
+	private final LocaleChangeInterceptor localeChangeInterceptor;
+	
+	public ProgInzCourseProject2023Application(LocaleChangeInterceptor localeChangeInterceptor) {
+		this.localeChangeInterceptor = localeChangeInterceptor;
 	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry interceptorRegistry) {
+		interceptorRegistry.addInterceptor(localeChangeInterceptor);
+	}
+	
+	public static void main(String[] args) {
+	    ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+	    messageSource.setBasenames("lang/messages");
+	    messageSource.setDefaultEncoding("UTF-8");
+	    System.out.println(messageSource.getMessage("hello", null, Locale.ROOT));
+	    SpringApplication.run(ProgInzCourseProject2023Application.class, args);
+	  }
 /*
 	@Bean // izsauks funkciju automātiski, kad sistēma tiks startēta
 	public CommandLineRunner testModel(IUserRepo userRepo, IAcademicPersonelRepo personelRepo, IStudentRepo studentRepo,

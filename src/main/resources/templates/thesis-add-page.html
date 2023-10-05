@@ -9,16 +9,21 @@
 
 <body>
 	<nav>
-		<button type="button" onclick="location.href='/logout'"
-			style="position: absolute; top: 10px; right: 10px;">Logout</button>
-	</nav>
-	<h2>Add New Thesis</h2>
+        <button type="button" th:text="#{switch-en}" onclick="window.location.href='?localeData=en'" style="position: absolute; top: 10px; right: 70px;">
+            <img src="flag_en.png" alt="English" style="width: 20px; height: 20px;">
+        </button>
+        <button type="button" th:text="#{switch-root}" onclick="window.location.href='?localeData=root'" style="position: absolute; top: 10px; right: 10px;">
+            <img src="flag_lv.png" alt="Latvian" style="width: 20px; height: 20px;">
+        </button>
+        <button type="button" onclick="location.href='/logout'" style="position: absolute; top: 10px; right: 130px;" th:text="#{logout-button}"></button>
+    </nav>
+	<h2 th:text="#{add-new-thesis}"></h2>
 	<!-- <form th:action="@{/thesis/addNew}" th:object="${thesis}" method="post"> -->
 	<form th:action="@{/professor/addNew}" th:object="${thesis}" method="post">
 		<div class="container">
 			<table>
 				<tr>
-					<th>Title (LV):</th>
+					<th  th:text="#{thesis-title-lv}">:</th>
 					<td>
 						<input type="text" th:field="*{titleLv}" required>
 						<br>
@@ -26,7 +31,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>Title (EN):</th>
+					<th th:text="#{thesis-title-en}">:</th>
 					<td>
 						<input type="text" th:field="*{titleEn}" required>
 						<br>
@@ -34,7 +39,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>Areas:</th>
+					<th th:text="#{thesis-areas}">:</th>
 					<td>
 						<select th:field="*{areas}" multiple="multiple">
 							<option th:each="area : ${areas}" th:value="${area}" th:text="${area}"></option>
@@ -44,7 +49,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>Complexity:</th>
+					<th th:text="#{thesis-complexity}">:</th>
 					<td>
 						<select th:field="*{complexity}">
 							<option th:each="complexity : ${complexities}" th:value="${complexity}"
@@ -55,7 +60,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>Public Notes:</th>
+					<th th:text="#{thesis-public-notes}">:</th>
 					<td>
 						<textarea th:field="*{publicNotes}" required></textarea>
 						<br>
@@ -63,10 +68,10 @@
 					</td>
 				</tr>
 				<tr>
-					<th>Supervisor:</th>
+					<th th:text="#{thesis-supervsor}">:</th>
 					<td>
 						<select th:field="*{supervisor}" required>
-							<option value="">Select Supervisor</option>
+							<option value="" th:text="#{thesis-select-supervisor}"></option>
 							<option th:each="person : ${supervisors}" th:value="${person.idp}"
 								th:text="${person.name + ' ' + person.surname}"></option>
 						</select>
@@ -78,8 +83,8 @@
 
 		</div>
 		<div align="center">
-			<button type="submit">Save</button>
-			<button type="button" onclick="location.href='/professor/showAll'">Cancel</button>
+			<button type="submit" th:text="#{save-button}">Save</button>
+			<button type="button" th:text="#{cancel-button}" onclick="location.href='/professor/showAll'">Cancel</button>
 			<!--	<button type="button" onclick="location.href='/thesis/showAll'">Cancel</button> -->
 		</div>
 	</form>

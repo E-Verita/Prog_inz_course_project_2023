@@ -3,50 +3,55 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Thesis Details</title>
+	<title th:text="#{thesis-details}"></title>
 	<link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 
 <body>
 	<nav>
-		<button type="button" onclick="location.href='/logout'"
-			style="position: absolute; top: 10px; right: 10px;">Logout</button>
-	</nav>
-	<h2>Thesis Details</h2>
+        <button type="button" th:text="#{switch-en}" onclick="window.location.href='?localeData=en'" style="position: absolute; top: 10px; right: 70px;">
+            <img src="flag_en.png" alt="English" style="width: 20px; height: 20px;">
+        </button>
+        <button type="button" th:text="#{switch-root}" onclick="window.location.href='?localeData=root'" style="position: absolute; top: 10px; right: 10px;">
+            <img src="flag_lv.png" alt="Latvian" style="width: 20px; height: 20px;">
+        </button>
+        <button type="button" onclick="location.href='/logout'" style="position: absolute; top: 10px; right: 130px;" th:text="#{logout-button}"></button>
+    </nav>
+	<h2 th:text="#{thesis-details}"></h2>
 	<h3 th:text="${thesis.titleLv}"></h3>
 	<div class="container">
 		<div class="column">
 			<table>
 				<tr>
-					<th>Thesis ID:</th>
+					<th th:text="#{thesis-id}"></th>
 					<td th:text="${thesis.idt}"></td>
 				</tr>
 				<tr>
-					<th>Title (LV):</th>
+					<th th:text="#{thesis-title-lv}"></th>
 					<td th:text="${thesis.titleLv}"></td>
 				</tr>
 				<tr>
-					<th>Title (EN):</th>
+					<th th:text="#{thesis-title-en}"></th>
 					<td th:text="${thesis.titleEn}"></td>
 				</tr>
 				<tr>
-					<th>Applications:</th>
+					<th th:text="#{thesis-applications}"></th>
 					<td th:text="${thesis.applications}"></td>
 				</tr>
 				<tr>
-					<th>Areas:</th>
+					<th th:text="#{thesis-areas}"></th>
 					<td th:text="${thesis.areas}"></td>
 				</tr>
 				<tr>
-					<th>Complexity:</th>
+					<th th:text="#{thesis-complexity}"></th>
 					<td th:text="${thesis.complexity}"></td>
 				</tr>
 				<tr>
-					<th>Public Notes:</th>
+                  	<th th:text="#{thesis-public-notes}"></th>
 					<td th:text="${thesis.publicNotes}"></td>
 				</tr>
 				<tr>
-					<th>Supervisor:</th>
+                    <th th:text="#{thesis-supervisor}"></th>
 					<td th:text="${thesis.supervisor?.name + ' ' + thesis.supervisor?.surname}"></td>
 				</tr>
 			</table>
@@ -61,13 +66,13 @@
 				<!--	<form th:action="@{'/application/addNew/' + ${thesis.idt}}" method="get"> -->
 				<form th:action="@{'/student/addNew/' + ${thesis.idt}}" method="get">
 
-					<button type="submit">Apply</button>
+					<button type="submit" th:text="#{apply-button}"></button>
 				</form>
 
 				<form th:action="@{/student/apply}" method="get">
 					<!-- <form th:action="@{/thesis/apply}" method="get"> -->
 
-					<button type="submit">Cancel</button>
+					<button type="submit" th:text="#{cancel-button}"></button>
 				</form>
 			</div>
 		</div>

@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Thesis List</title>
-<link rel="stylesheet" type="text/css" href="/style.css">
+	<link rel="stylesheet" type="text/css" href="/style.css">
+
 </head>
 <body>
-	<nav>
+   <nav>
         <button type="button" th:text="#{switch-en}" onclick="window.location.href='?localeData=en'" style="position: absolute; top: 10px; right: 70px;">
             <img src="flag_en.png" alt="English" style="width: 20px; height: 20px;">
         </button>
@@ -15,7 +16,7 @@
         </button>
         <button type="button" onclick="location.href='/logout'" style="position: absolute; top: 10px; right: 130px;" th:text="#{logout-button}"></button>
     </nav>
-    <h1 th:text="#{thesis-list-for}"><span th:text="${searchedElement}"></span></h1>
+         <h1 th:text="#{thesis-list-for}"><span th:text="${searchedElement}"></span></h1>
     <div class="container">
         <table>
             <thead>
@@ -64,5 +65,9 @@
 				<button type="button" onclick="location.href='/professor/addNew'" th:text="#{thesis-add-new-button}"></button>
 
 			</div>
-</body>
+			<footer>
+	<img src="flag_lv.png" alt="Flowers in Chania">
+</footer>
+		</body>
+
 </html>

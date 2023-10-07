@@ -23,6 +23,7 @@ body {
     margin: 0;
     background: linear-gradient(#DAD299, #B0DAB9);
     background-repeat: no-repeat; /* Add this line */
+    color:#006540;
 }
 
 img {
@@ -90,6 +91,8 @@ nav ul {
 }
 
 nav ul li {
+	
+	
     list-style-type: none;
     display: inline-block;
 }
@@ -143,12 +146,25 @@ input[type="text"],
             font-size: 80%;
         }
         
-.flag-icon-class-for-uk {
-    /* Add styles for the UK flag icon */
-    /* You can use background-image, font-size, etc. to style the icon */
+.flag-icon-class-for-uk,
+.flag-icon-class-for-latvia {
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+}    
+
+footer {
+    position: relative;
+    width: 100%;
+    padding-top: 15.88%;
+    overflow: hidden;
+    background-color: #f0f0f0; 
 }
 
-.flag-icon-class-for-latvia {
-    /* Add styles for the Latvian flag icon */
-    /* You can use background-image, font-size, etc. to style the icon */
+.footer-image {
+    width: 100%; 
+    height: auto; 
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }

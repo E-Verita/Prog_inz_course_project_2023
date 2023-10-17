@@ -55,8 +55,9 @@
 				</tr>
 				<tr>
                     <th th:text="#{thesis-assigned-student}"></th>
-					<td th:text="${thesis.assignedStudent?.name + ' ' + thesis.assignedStudent?.surname}"></td>
-				</tr>
+<td
+						th:text="${thesis.assignedStudent != null ? thesis.assignedStudent.name + ' ' + thesis.assignedStudent.surname : ''}">
+					</td>				</tr>
 				<tr>
                     <th th:text="#{thesis-supervisor}"></th>
 					<td th:text="${thesis.supervisor?.name + ' ' + thesis.supervisor?.surname}"></td>

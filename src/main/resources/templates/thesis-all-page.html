@@ -1,73 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Thesis List</title>
+	<meta charset="UTF-8">
+	<title>Thesis List</title>
 	<link rel="stylesheet" type="text/css" href="/style.css">
 
 </head>
+
 <body>
-   <nav>
-        <button type="button" th:text="#{switch-en}" onclick="window.location.href='?localeData=en'" style="position: absolute; top: 10px; right: 70px;">
-            <img src="flag_en.png" alt="English" style="width: 20px; height: 20px;">
-        </button>
-        <button type="button" th:text="#{switch-root}" onclick="window.location.href='?localeData=root'" style="position: absolute; top: 10px; right: 10px;">
-            <img src="flag_lv.png" alt="Latvian" style="width: 20px; height: 20px;">
-        </button>
-        <button type="button" onclick="location.href='/logout'" style="position: absolute; top: 10px; right: 130px;" th:text="#{logout-button}"></button>
-    </nav>
-         <h1 th:text="#{thesis-list-for}"><span th:text="${searchedElement}"></span></h1>
-    <div class="container">
-        <table>
-            <thead>
-                <tr>
-                    <th th:text="#{thesis-id}"></th>
-                    <th th:text="#{thesis-title-lv}"></th>
-                    <th th:text="#{thesis-title-en}"></th>
-                    <th th:text="#{thesis-applications}"></th>
-                    <th th:text="#{thesis-areas}"></th>
-                    <th th:text="#{thesis-complexity}"></th>
-                  	<th th:text="#{thesis-public-notes}"></th>
-                    <th th:text="#{thesis-assigned-student}"></th>
-                    <th th:text="#{thesis-supervisor}"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="thesis : ${thesis}">
-                    <td th:text="${thesis.idt}"></td>
-                    <td><b>
-						<!-- <a th:href="@{/thesis/show/{id}(id=${thesis.idt})}" th:text="${thesis.titleLv}"></a> -->
-                        <a th:href="@{/professor/show/{id}(id=${thesis.idt})}" th:text="${thesis.titleLv}"></a>
-                        </b>
-                    </td>
-                    <td th:text="${thesis.titleEn}"></td>
-                    <td th:text="${thesis.applications}"></td>
-                    <td>
-                        <ul>
-                            <li th:each="area : ${thesis.areas}" th:text="${area}"></li>
-                        </ul>
-                    </td>
-                    <td th:text="${thesis.complexity}"></td>
-                    <td th:text="${thesis.publicNotes}"></td>
-                    <td th:text="${thesis.assignedStudent?.name}"></td>
-                    <td th:text="${thesis.supervisor.name + ' ' + thesis.supervisor.surname + ' (' + thesis.supervisor.degree + ')'}"></td>
-                </tr>
-            </tbody>
-        </table>
+	<nav>
+		<button type="button" th:text="#{switch-en}" onclick="window.location.href='?localeData=en'"
+			style="position: absolute; top: 10px; right: 70px;">
+			<img src="flag_en.png" alt="English" style="width: 20px; height: 20px;">
+		</button>
+		<button type="button" th:text="#{switch-root}" onclick="window.location.href='?localeData=root'"
+			style="position: absolute; top: 10px; right: 10px;">
+			<img src="flag_lv.png" alt="Latvian" style="width: 20px; height: 20px;">
+		</button>
+		<button type="button" onclick="location.href='/logout'" style="position: absolute; top: 10px; right: 130px;"
+			th:text="#{logout-button}"></button>
+	</nav>
+	<h1 th:text="#{thesis-list-for}"><span th:text="${searchedElement}"></span></h1>
+	<div class="container">
+		<table>
+			<thead>
+				<tr>
+					<th th:text="#{thesis-id}"></th>
+					<th th:text="#{thesis-title-lv}"></th>
+					<th th:text="#{thesis-title-en}"></th>
+					<th th:text="#{thesis-applications}"></th>
+					<th th:text="#{thesis-areas}"></th>
+					<th th:text="#{thesis-complexity}"></th>
+					<th th:text="#{thesis-public-notes}"></th>
+					<th th:text="#{thesis-assigned-student}"></th>
+					<th th:text="#{thesis-supervisor}"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="thesis : ${thesis}">
+					<td th:text="${thesis.idt}"></td>
+					<td><b>
+							<!-- <a th:href="@{/thesis/show/{id}(id=${thesis.idt})}" th:text="${thesis.titleLv}"></a> -->
+							<a th:href="@{/professor/show/{id}(id=${thesis.idt})}" th:text="${thesis.titleLv}"></a>
+						</b>
+					</td>
+					<td th:text="${thesis.titleEn}"></td>
+					<td th:text="${thesis.applications}"></td>
+					<td>
+						<ul>
+							<li th:each="area : ${thesis.areas}" th:text="${area}"></li>
+						</ul>
+					</td>
+					<td th:text="${thesis.complexity}"></td>
+					<td th:text="${thesis.publicNotes}"></td>
+					<td
+						th:text="${thesis.assignedStudent != null ? thesis.assignedStudent.name + ' ' + thesis.assignedStudent.surname : ''}">
+					</td>
+					<td
+						th:text="${thesis.supervisor.name + ' ' + thesis.supervisor.surname + ' (' + thesis.supervisor.degree + ')'}">
+					</td>
+				</tr>
+			</tbody>
+		</table>
 
-        <div th:if="${error}" style="color: red;">
-            <p th:text="${error}"></p>
-        </div>
-       
-    </div>
-     <div align="center">
-				<!--<button type="button" onclick="location.href='/thesis/addNew'">Add new Thesis</button> -->
-				<button type="button" onclick="location.href='/professor/addNew'" th:text="#{thesis-add-new-button}"></button>
+		<div th:if="${error}" style="color: red;">
+			<p th:text="${error}"></p>
+		</div>
 
-			</div>
-			<footer>
-	<img src="flag_lv.png" alt="Flowers in Chania">
-</footer>
-		</body>
+	</div>
+	<div align="center">
+		<!--<button type="button" onclick="location.href='/thesis/addNew'">Add new Thesis</button> -->
+		<button type="button" onclick="location.href='/professor/addNew'" th:text="#{thesis-add-new-button}"></button>
+
+	</div>
+	<footer>
+		<img src="flag_lv.png" alt="Flowers in Chania">
+	</footer>
+</body>
 
 </html>

@@ -156,8 +156,11 @@ public class ProfessorController {
 	    try {
 	        Thesis thesis = thesisService.getThesisById(id);
 	        model.addAttribute("thesis", thesis);
-			ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
-		     model.addAttribute("supervisors", supervisors);
+			//ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
+	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    	String currentPrincipalName = authentication.getName();
+			ArrayList<AcademicPersonel> supervisor = (ArrayList<AcademicPersonel>) academicService.findByUsername(currentPrincipalName);
+		     model.addAttribute("supervisors", supervisor);
 	         model.addAttribute("areas", areas);
 	         model.addAttribute("complexities", complexities);
 	         ArrayList<Student> students = (ArrayList<Student>) studentService.findAll();

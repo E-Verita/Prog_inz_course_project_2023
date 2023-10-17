@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +29,7 @@ import lv.venta.services.IThesisService;
 @RequestMapping("/professor")
 public class ProfessorController {
 	
+
 	@Autowired
 	private IThesisService thesisService;
 	
@@ -74,8 +77,12 @@ public class ProfessorController {
 
 	@GetMapping("/addNew")
 	public String showAddThesisForm(Model model) throws Exception {
-		ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
-        model.addAttribute("supervisors", supervisors);
+		//ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	String currentPrincipalName = authentication.getName();
+		ArrayList<AcademicPersonel> supervisor = (ArrayList<AcademicPersonel>) academicService.findByUsername(currentPrincipalName);
+    	System.out.println(currentPrincipalName);
+        model.addAttribute("supervisors", supervisor); //-s
 		model.addAttribute("thesis", new Thesis());
 		model.addAttribute("areas", areas);
 		model.addAttribute("complexities", complexities);

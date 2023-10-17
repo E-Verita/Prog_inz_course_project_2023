@@ -8,4 +8,6 @@ public interface IAcademicPersonelService {
 
 	ArrayList<AcademicPersonel> findAll() throws Exception;
 
+	ArrayList<AcademicPersonel> findByUsername(String currentPrincipalName) throws Exception;
+
 }

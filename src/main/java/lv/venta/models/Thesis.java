@@ -42,7 +42,6 @@ import lv.venta.models.users.Student;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
 public class Thesis {
 	@Setter(value = AccessLevel.NONE)
@@ -150,8 +149,20 @@ public class Thesis {
 		this.thesisApplications = thesisApplications;
 	}
 
-	
-	
+	public Thesis() {
+		this.titleLv = "";
+        this.titleEn = "";
+        this.applications = 0;
+        this.areas = new ArrayList<>();
+        this.complexity = null;
+        this.privateNotes = "";
+        this.publicNotes = "";
+        this.assignedStudent = null;
+        this.supervisor = null;
+        this.reviewers = new ArrayList<>();
+        this.thesisApplications = new ArrayList<>();
+	}
+ 
 	
 	
 }

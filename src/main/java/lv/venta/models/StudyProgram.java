@@ -1,6 +1,7 @@
 package lv.venta.models;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import jakarta.persistence.Column;
@@ -11,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -86,6 +88,22 @@ public class StudyProgram {
 	
 	@OneToMany(mappedBy="studyProgram")
 	private Collection <Student> students;
+	
+	
+	@ManyToMany(mappedBy="programms")
+	private Collection <Thesis> thesisForProgram = new ArrayList<>();
+	
+	public void addThesisForProgram(Thesis thesis) {
+		if(!thesisForProgram.contains(thesis)) {
+			thesisForProgram.add(thesis);
+		}
+	}
+	
+	public void removeThesisForReviews(Thesis thesis) {
+		if(thesisForProgram.contains(thesis)) {
+			thesisForProgram.remove(thesis);
+		}
+	}
 
 	public StudyProgram(
 			@Size(min = 3, max = 250, message = "Title of study program needs to be 3 - 250 char long") @NotNull(message = "Title field cannot be empty") String title,

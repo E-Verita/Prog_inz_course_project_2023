@@ -6,16 +6,20 @@
 	<title th:text="#{thesis-details}"></title>
 	<link rel="stylesheet" type="text/css" href="/style.css">
 </head>
+
 <body>
 	<nav>
-        <button type="button" th:text="#{switch-en}" onclick="window.location.href='?localeData=en'" style="position: absolute; top: 10px; right: 70px;">
-            <img src="flag_en.png" alt="English" style="width: 20px; height: 20px;">
-        </button>
-        <button type="button" th:text="#{switch-root}" onclick="window.location.href='?localeData=root'" style="position: absolute; top: 10px; right: 10px;">
-            <img src="flag_lv.png" alt="Latvian" style="width: 20px; height: 20px;">
-        </button>
-        <button type="button" onclick="location.href='/logout'" style="position: absolute; top: 10px; right: 130px;" th:text="#{logout-button}"></button>
-    </nav>
+		<button type="button" th:text="#{switch-en}" onclick="window.location.href='?localeData=en'"
+			style="position: absolute; top: 10px; right: 70px;">
+			<img src="flag_en.png" alt="English" style="width: 20px; height: 20px;">
+		</button>
+		<button type="button" th:text="#{switch-root}" onclick="window.location.href='?localeData=root'"
+			style="position: absolute; top: 10px; right: 10px;">
+			<img src="flag_lv.png" alt="Latvian" style="width: 20px; height: 20px;">
+		</button>
+		<button type="button" onclick="location.href='/logout'" style="position: absolute; top: 10px; right: 130px;"
+			th:text="#{logout-button}"></button>
+	</nav>
 	<h2 th:text="#{thesis-details}"></h2>
 	<h3 th:text="${thesis.titleLv}"></h3>
 	<div class="container">
@@ -50,16 +54,26 @@
 					<td th:text="${thesis.privateNotes}"></td>
 				</tr>
 				<tr>
-                  	<th th:text="#{thesis-public-notes}"></th>
+					<th th:text="#{thesis-public-notes}"></th>
 					<td th:text="${thesis.publicNotes}"></td>
 				</tr>
 				<tr>
-                    <th th:text="#{thesis-assigned-student}"></th>
-<td
+					<th th:text="#{thesis-assigned-student}"></th>
+					<td
 						th:text="${thesis.assignedStudent != null ? thesis.assignedStudent.name + ' ' + thesis.assignedStudent.surname : ''}">
-					</td>				</tr>
+					</td>
+				</tr>
 				<tr>
-                    <th th:text="#{thesis-supervisor}"></th>
+					<th th:text="#{study-program}"></th>
+					<td>
+						<ul>
+							<li th:each="program : ${thesis.programms}" th:text="${program.level}"></li>
+						</ul>
+					</td>
+				</tr>
+
+				<tr>
+					<th th:text="#{thesis-supervisor}"></th>
 					<td th:text="${thesis.supervisor?.name + ' ' + thesis.supervisor?.surname}"></td>
 				</tr>
 			</table>
@@ -73,11 +87,12 @@
 					<button type="submit" class="button" th:text="#{delete-button}"></button>
 
 					<!--<button type="button" th:onclick="|location.href='/thesis/update/' + ${thesis.idt}|" >Update</button> -->
-					<button type="button"
-						th:onclick="|location.href='/professor/update/' + ${thesis.idt}|" th:text="#{update-button}"></button>
+					<button type="button" th:onclick="|location.href='/professor/update/' + ${thesis.idt}|"
+						th:text="#{update-button}"></button>
 
 					<!--<button type="button" onclick="location.href='/thesis/showAll'">Return to Main Page</button> -->
-					<button type="button" onclick="location.href='/professor/showAll'" th:text="#{return-to-main-button}"></button>
+					<button type="button" onclick="location.href='/professor/showAll'"
+						th:text="#{return-to-main-button}"></button>
 			</div>
 			</form>
 		</div>

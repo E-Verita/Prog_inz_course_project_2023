@@ -13,6 +13,8 @@ import lv.venta.models.users.AcademicPersonel;
 import lv.venta.models.users.Student;
 import lv.venta.repos.IThesisRepo;
 import lv.venta.services.IThesisService;
+import lv.venta.models.StudyProgram;
+
 
 @Service
 public class ThesisServiceImplWithDB implements IThesisService {
@@ -40,8 +42,8 @@ public class ThesisServiceImplWithDB implements IThesisService {
 
 	@Override
 	public void insertNewThesis(String titleLv, String titleEn, Collection<Area> areas, Complexity complexity,
-			String publicNotes, AcademicPersonel supervisor) {
-		thesisRepo.save(new Thesis(titleLv, titleEn, areas, complexity, publicNotes, supervisor));
+			String publicNotes, Collection<StudyProgram> programs, AcademicPersonel supervisor) {
+		thesisRepo.save(new Thesis(titleLv, titleEn, areas, complexity, publicNotes, programs, supervisor));
 
 	}
 
@@ -65,7 +67,7 @@ public class ThesisServiceImplWithDB implements IThesisService {
 
 	@Override
 	public void updateThesisById(long id, String titleLv, String titleEn, Collection<Area> areas, Complexity complexity,
-			String privateNotes, String publicNotes, Student assignedStudent, AcademicPersonel supervisor) throws Exception {
+			String privateNotes, String publicNotes,  Collection<StudyProgram> programs, Student assignedStudent, AcademicPersonel supervisor) throws Exception {
 		if (thesisRepo.existsById(id)) {
 	        Thesis updatedThesis = thesisRepo.findById(id).get();
 	        updatedThesis.setTitleLv(titleLv);
@@ -74,6 +76,7 @@ public class ThesisServiceImplWithDB implements IThesisService {
 	        updatedThesis.setComplexity(complexity);
 	        updatedThesis.setPrivateNotes(privateNotes);
 	        updatedThesis.setPublicNotes(publicNotes);
+	        updatedThesis.setProgramms(programs);
 	        updatedThesis.setAssignedStudent(assignedStudent);
 	        updatedThesis.setSupervisor(supervisor);
 	        thesisRepo.save(updatedThesis);

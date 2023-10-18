@@ -120,6 +120,27 @@ public class Thesis {
 		}
 	}
 	
+	
+	@ManyToMany
+	@JoinTable(name = "thesis_programms",
+	joinColumns = @JoinColumn(name = "Idt"),
+	inverseJoinColumns = @JoinColumn(name = "Idsp"))
+	private Collection<StudyProgram> programms = new ArrayList<>();
+	
+	
+	public void addProgram(StudyProgram program) {
+		if(!programms.contains(program)) {
+			programms.add(program);
+		}
+	}
+	
+	public void removeProgram(StudyProgram program) {
+		if(programms.contains(program)) {
+			programms.remove(program);
+		}
+	}
+	
+	
 	@OneToMany(mappedBy="thesis")
 	private Collection <ThesisApplication> thesisApplications;
 
@@ -137,16 +158,16 @@ public class Thesis {
 
 	public Thesis(@NotNull @Size(min = 3, max = 250) String titleLv, @NotNull @Size(min = 3, max = 250) String titleEn,
 			@NotNull Collection<Area> areas, @NotNull Complexity complexity,
-			@NotNull @Size(min = 0, max = 500) String publicNotes, AcademicPersonel supervisor,
-			Collection<ThesisApplication> thesisApplications) {
+			@NotNull @Size(min = 0, max = 500) String publicNotes, Collection<StudyProgram> programs,
+			AcademicPersonel supervisor) {
 		super();
 		this.titleLv = titleLv;
 		this.titleEn = titleEn;
 		this.areas = areas;
 		this.complexity = complexity;
 		this.publicNotes = publicNotes;
+		this.programms = programs;
 		this.supervisor = supervisor;
-		this.thesisApplications = thesisApplications;
 	}
 
 	public Thesis() {

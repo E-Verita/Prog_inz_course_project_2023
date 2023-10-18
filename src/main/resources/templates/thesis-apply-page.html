@@ -51,6 +51,14 @@
 					<td th:text="${thesis.publicNotes}"></td>
 				</tr>
 				<tr>
+					<th th:text="#{study-program}"></th>
+					<td>
+						<ul>
+							<li th:each="program : ${thesis.programms}" th:text="${program.level}"></li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
                     <th th:text="#{thesis-supervisor}"></th>
 					<td th:text="${thesis.supervisor?.name + ' ' + thesis.supervisor?.surname}"></td>
 				</tr>

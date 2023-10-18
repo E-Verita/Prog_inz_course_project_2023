@@ -41,7 +41,7 @@
 				<tr>
 					<th th:text="#{thesis-areas}">:</th>
 					<td>
-						<select th:field="*{areas}" multiple="multiple">
+						<select th:field="*{areas}" multiple="multiple"> 
 							<option th:each="area : ${areas}" th:value="${area}" th:text="${area}"></option>
 						</select>
 						<br>
@@ -65,6 +65,18 @@
 						<textarea th:field="*{publicNotes}" required></textarea>
 						<br>
 						<small th:errors="*{publicNotes}"></small>
+					</td>
+				</tr>
+				<tr>
+					<th th:text="#{study-program}">:</th>
+					<td>
+						<select th:field="*{programms}" required multiple="multiple">
+							<option value="" th:text="#{study-program-select}"></option>
+							<option th:each="program : ${programms}" th:value="${program.idsp}"
+								th:text="${program.level}"></option>
+						</select>
+						<br>
+						<small th:errors="*{programms}"></small>
 					</td>
 				</tr>
 				<tr>

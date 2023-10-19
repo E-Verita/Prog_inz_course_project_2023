@@ -99,7 +99,7 @@ public class ThesisServiceImplWithDB implements IThesisService {
         updatedThesis.setSupervisor(thesis.getSupervisor());
         updatedThesis.setReviewers(thesis.getReviewers());
         updatedThesis.setThesisApplications(thesis.getThesisApplications());
-        
+        updatedThesis.setProgramms(thesis.getProgramms());
         thesisRepo.save(updatedThesis);
 		} else {
 	        throw new Exception("Invalid ID");

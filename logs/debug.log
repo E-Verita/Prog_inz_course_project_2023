@@ -1,0 +1,94 @@
+2023-10-19 22:49:36,216 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 22:49:54,481 DEBUG ProfessorController:137 - [] Method: showThesisById
+2023-10-19 23:05:53,450 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:05:55,655 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:06:03,757 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:06:13,095 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:07:00,797 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:07:02,437 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:07:03,587 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:07:05,101 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:07:11,682 DEBUG ProfessorController:224 - [] Method: updateThesisById
+2023-10-19 23:07:11,725 WARN  ProfessorController:229 - [] Thesis wit ID 8 updated
+2023-10-19 23:07:11,733 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:07:17,836 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:07:20,523 DEBUG ProfessorController:224 - [] Method: updateThesisById
+2023-10-19 23:07:20,533 WARN  ProfessorController:229 - [] Thesis wit ID 8 updated
+2023-10-19 23:07:20,540 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:07:27,253 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:07:36,150 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:07:39,878 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:07:41,861 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:07:45,074 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:07:47,539 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:07:48,629 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:07:49,932 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:07:54,152 DEBUG ProfessorController:224 - [] Method: updateThesisById
+2023-10-19 23:07:54,169 WARN  ProfessorController:229 - [] Thesis wit ID 1 updated
+2023-10-19 23:07:54,176 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:07:56,508 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:12:50,579 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:12:53,905 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:12:56,660 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:12:59,374 DEBUG ProfessorController:224 - [] Method: updateThesisById
+2023-10-19 23:12:59,407 WARN  ProfessorController:229 - [] Thesis wit ID 1 updated
+2023-10-19 23:12:59,415 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:19:31,136 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:19:33,090 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:19:35,615 DEBUG ProfessorController:224 - [] Method: updateThesisById
+2023-10-19 23:19:35,651 WARN  ProfessorController:229 - [] Thesis wit ID 1 updated
+2023-10-19 23:19:35,660 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:19:39,521 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:22:04,154 DEBUG ProfessorController:98 - [] Method: showAddThesisForm
+2023-10-19 23:22:19,273 DEBUG ProfessorController:118 - [] Method: addNewThesis
+2023-10-19 23:22:19,288 WARN  ProfessorController:124 - [] Thesis dsfsf added by Person(idp=3, name=Estere, surname=Vitola, personCode=543211-12345, user=lv.venta.models.users.User@1fd0203c)
+2023-10-19 23:22:19,295 DEBUG ProfessorController:77 - [] Method: showThesisBSupervisorId
+2023-10-19 23:24:18,556 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:24:20,815 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:24:38,056 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:24:52,902 DEBUG ProfessorController:179 - [] Method: removeThesisByIdRedirected
+2023-10-19 23:24:52,957 ERROR ProfessorController:187 - [] could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`nis`.`thesis_applications_table`, CONSTRAINT `FKqh4f42mx8xss1qiwiehcld92l` FOREIGN KEY (`idt`) REFERENCES `thesis_table` (`idt`))] [delete from thesis_table where idt=?]; SQL [delete from thesis_table where idt=?]; constraint [null]
+2023-10-19 23:25:52,639 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:26:15,958 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:26:18,117 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:26:20,576 DEBUG ProfessorController:179 - [] Method: removeThesisByIdRedirected
+2023-10-19 23:26:20,644 WARN  ProfessorController:183 - [] Thesis with ID 102 deleted.
+2023-10-19 23:26:20,656 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:33:37,137 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:33:38,400 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:33:40,277 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:34:34,013 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:34:37,579 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:34:38,589 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:34:39,756 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:34:41,034 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:34:42,051 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:34:44,437 DEBUG ProfessorController:179 - [] Method: removeThesisByIdRedirected
+2023-10-19 23:34:44,483 ERROR ProfessorController:187 - [] could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`nis`.`thesis_applications_table`, CONSTRAINT `FKqh4f42mx8xss1qiwiehcld92l` FOREIGN KEY (`idt`) REFERENCES `thesis_table` (`idt`))] [delete from thesis_table where idt=?]; SQL [delete from thesis_table where idt=?]; constraint [null]
+2023-10-19 23:34:46,714 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:34:56,203 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:34:57,597 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:34:59,035 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:36:10,251 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:36:12,026 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:36:13,180 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:36:14,474 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:36:21,718 DEBUG ProfessorController:224 - [] Method: updateThesisById
+2023-10-19 23:36:21,737 WARN  ProfessorController:229 - [] Thesis wit ID 8 updated
+2023-10-19 23:36:21,744 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:36:23,794 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:36:25,640 DEBUG ProfessorController:224 - [] Method: updateThesisById
+2023-10-19 23:36:25,677 WARN  ProfessorController:229 - [] Thesis wit ID 8 updated
+2023-10-19 23:36:25,683 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:36:28,023 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:37:00,085 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:37:11,354 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:37:16,613 DEBUG ProfessorController:224 - [] Method: updateThesisById
+2023-10-19 23:37:16,626 WARN  ProfessorController:229 - [] Thesis wit ID 3 updated
+2023-10-19 23:37:16,633 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:37:18,953 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-19 23:37:56,977 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:37:58,497 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:38:31,680 DEBUG ProfessorController:195 - [] Method: showUpdateThesisForm
+2023-10-19 23:38:33,567 DEBUG ProfessorController:144 - [] Method: showThesisById
+2023-10-19 23:38:36,784 DEBUG ProfessorController:56 - [] Method: showAllThesis

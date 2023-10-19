@@ -4,10 +4,11 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Locale;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -48,6 +49,8 @@ public class ProgInzCourseProject2023Application implements WebMvcConfigurer {
 	
 	private final LocaleChangeInterceptor localeChangeInterceptor;
 	
+	
+	
 	public ProgInzCourseProject2023Application(LocaleChangeInterceptor localeChangeInterceptor) {
 		this.localeChangeInterceptor = localeChangeInterceptor;
 	}
@@ -59,6 +62,8 @@ public class ProgInzCourseProject2023Application implements WebMvcConfigurer {
 	
 	 
 	public static void main(String[] args) {
+		
+		// enable i18
 	    ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 	    messageSource.setBasenames("lang/messages");
 	    messageSource.setDefaultEncoding("UTF-8");

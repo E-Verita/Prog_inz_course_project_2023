@@ -3,6 +3,8 @@ package lv.venta.controllers;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,8 +46,11 @@ public class StudentController {
 	private ArrayList<Area> areas = new ArrayList<>(Arrays.asList(Area.values()));
 	private ArrayList<Complexity> complexities = new ArrayList<>(Arrays.asList(Complexity.values()));
 
+	Logger logger = LoggerFactory.getLogger(ProfessorController.class);
+
 	@GetMapping("/apply")
 	public String showAwailableThesis(Model model) throws Exception {
+		logger.debug("Method: showAwailableThesis");
 		try {
 			ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>) academicService.findAll();
 			ArrayList<Thesis> thesis = thesisService.selectAllByAssignedStudentIsNull();
@@ -55,6 +60,7 @@ public class StudentController {
 			model.addAttribute("complexities", complexities);
 			return "thesis-all-apply-page";
 		} catch (Exception e) {
+			logger.error(e.getMessage());
 			model.addAttribute("error", e.getMessage());
 			return "error-page";
 		}
@@ -62,6 +68,7 @@ public class StudentController {
 
 	@GetMapping("/apply/{id}")
 	public String showThesisInformation(@PathVariable("id") long id, Model model) {
+		logger.debug("Method: showThesisInformation");
 		try {
 			Thesis thesis = thesisService.getThesisById(id);
 			if (thesis == null) {
@@ -70,6 +77,7 @@ public class StudentController {
 			model.addAttribute("thesis", thesis);
 			return "thesis-apply-page";
 		} catch (Exception e) {
+			logger.error(e.getMessage());
 			model.addAttribute("error", e.getMessage());
 			return "error-page";
 		}
@@ -77,6 +85,7 @@ public class StudentController {
 
 	@GetMapping("/addNew/{thesisId}")
 	public String addNewApplication(@PathVariable("thesisId") long thesisId, Model model) throws Exception {
+		logger.debug("Method: addNewApplication");
 		Thesis thesis = thesisService.getThesisById(thesisId);
 		if (thesis == null) {
 			model.addAttribute("error", "Thesis not found with ID: " + thesisId);
@@ -97,6 +106,7 @@ public class StudentController {
 	@PostMapping("/addNew/{thesisId}")
 	public String addNewThesisApplication(@Valid @ModelAttribute ThesisApplication application,
 			@PathVariable("thesisId") long thesisId, BindingResult result, Model model) throws Exception {
+		logger.debug("Method: addNewThesisApplication");
 		Thesis thesis = thesisService.getThesisById(thesisId);
 		application.setThesis(thesis);
 		System.out.println("0: " + application.getThesis() + "\n" + application.getStudent() + "\n"
@@ -118,6 +128,7 @@ public class StudentController {
 				System.out.println("2: " + application.getThesis() + "\n" + application.getStudent() + "\n"
 						+ application.getAim() + "\n" + application.getTasks());
 				model.addAttribute("error", e.getMessage());
+				logger.error(e.getMessage());
 				return "error-page";
 			}
 		} else {
@@ -128,17 +139,20 @@ public class StudentController {
 			model.addAttribute("students", students);
 			model.addAttribute("thesis", application.getThesis());
 			model.addAttribute("application", application);
+			logger.warn("Incorrect apllication details provided");
 			return "application-add-page";
 		}
 	}
 
 	@GetMapping("/application/{applicationId}/{thesisId}/{studentId}")
 	public String applicationSuccessful(@PathVariable("applicationId") long applicationId, @PathVariable("thesisId") long thesisId, @PathVariable("studentId") long studentId, Model model) throws Exception {
+		logger.debug("Method: applicationSuccessful");
 		try {
 			ThesisApplication thesisApplication = applicationService.getThesisApplicationById(applicationId);
 			Thesis thesis = thesisService.getThesisById(thesisId);
 			Student student = studentService.getStudentById(studentId);
 			if (thesisApplication == null) {
+				logger.warn("Thesis application not found with ID: " + applicationId);
 				throw new Exception("Thesis application not found with ID: " + applicationId);
 			}		
 				
@@ -147,8 +161,10 @@ public class StudentController {
 			model.addAttribute("student", student);
 			model.addAttribute("thesisApplication", thesisApplication);
 			System.err.println("\n\n " + thesisApplication);
+			logger.warn("Application id: " + thesisApplication.getIdta() + " submitted successfully");
 			return "application-success-student";
 		} catch (Exception e) {
+			logger.error(e.getMessage());
 			model.addAttribute("error", e.getMessage());
 			return "error-page";
 		}

@@ -96,8 +96,6 @@ public class ProfessorController {
 	@GetMapping("/addNew")
 	public String showAddThesisForm(Model model) throws Exception {
 		logger.debug("Method: showAddThesisForm");
-		// ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>)
-		// academicService.findAll();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
 		ArrayList<AcademicPersonel> supervisor = (ArrayList<AcademicPersonel>) academicService
@@ -197,8 +195,6 @@ public class ProfessorController {
 		try {
 			Thesis thesis = thesisService.getThesisById(id);
 			model.addAttribute("thesis", thesis);
-			// ArrayList<AcademicPersonel> supervisors = (ArrayList<AcademicPersonel>)
-			// academicService.findAll();
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String currentPrincipalName = authentication.getName();
 			ArrayList<AcademicPersonel> supervisor = (ArrayList<AcademicPersonel>) academicService

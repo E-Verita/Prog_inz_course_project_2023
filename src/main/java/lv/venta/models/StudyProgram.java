@@ -126,8 +126,7 @@ public class StudyProgram {
 	public String toString() {
 		return "StudyProgram [idsp=" + idsp + ", title=" + title + ", director=" + director + ", studytype=" + studytype
 				+ ", level=" + level + ", noOfSemester=" + noOfSemester + ", thesisSemester=" + thesisSemester
-				+ ", startYear=" + startYear + ", gradYear=" + gradYear + ", students=" + students
-				+ ", thesisForProgram=" + thesisForProgram + "]";
+				+ ", startYear=" + startYear + ", gradYear=" + gradYear + ", students=" + students + "]";
 	}
 	
 	

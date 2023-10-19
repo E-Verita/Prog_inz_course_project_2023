@@ -4,11 +4,10 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Locale;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -140,6 +139,13 @@ public class ProgInzCourseProject2023Application implements WebMvcConfigurer {
 				StudyProgram idsp1 = new StudyProgram("Programmēšanas speciālists", ida3, StudyType.professional,
 						Level.first_level, 4, 4, 2023, 2024);
 				programRepo.save(idsp1);
+				StudyProgram idsp2 = new StudyProgram("ITK Bakalaurs", ida2, StudyType.professional,
+						Level.bachelor, 4, 4, 2023, 2024);
+				programRepo.save(idsp2);
+				StudyProgram idsp3 = new StudyProgram("IKT Magists", ida1, StudyType.professional,
+						Level.master, 4, 4, 2023, 2024);
+				programRepo.save(idsp3);
+				
 
 				Student ids1 = new Student("Students", "Pirmais", "111111-11111", idu4, "sp01234", false,
 						LocalDate.of(1991, 10, 4), AcademicStatus.studying, false, idsp1);
@@ -160,49 +166,49 @@ public class ProgInzCourseProject2023Application implements WebMvcConfigurer {
 						Arrays.asList(Area.security, Area.finance, Area.blockchain), Complexity.average,
 						"Kvalifikācijas darba izstrādes laikā students pētīs, kā blockchain tehnoloģijas var palīdzēt uzlabot drošību finanšu nozarē. Analizēs, kā blockchain nodrošina drošību, kā tas palīdz izvairīties no krāpniecības un kā blockchain var tikt izmantots finanšu nozarē, lai uzlabotu procesus un nodrošinātu lielāku drošību darījumu veikšanā.\r\n"
 								+ "Studentam, kas interesējas par šo tēmu, varētu būt sagaidāmas priekšzināšanas, kas ir blockchain tehnoloģijas un kādas ir tās priekšrocības drošības uzlabošanai finanšu nozarē. Varētu arī būt interesējošs jautājums par to, kā blockchain var tikt pielietots citās nozarēs, piemēram, medicīnā vai publiskajā sektorā.",
-						ida1);
+								Arrays.asList(idsp1), ida1);
 
 				Thesis idt2 = new Thesis("Datoru tīklu drošības risinājumu analīze un izvērtējums",
 						"Analysis and evaluation of computer network security solutions",
 						Arrays.asList(Area.security, Area.network), Complexity.average,
 						"Kvalifikācijas darba mērķis ir izpētīt un analizēt dažādus datoru tīklu drošības risinājumus, to efektivitāti un piemērošanas jomas. Darba gaitā tiks veikta salīdzinoša analīze starp dažādiem drošības protokoliem, mehānismiem un algoritmiem, lai noskaidrotu to atbilstību datoru tīklu drošības prasībām. Galvenais uzdevums ir izvērtēt esošos risinājumus un sniegt ieteikumus par to piemērošanu un uzlabošanu.",
-						ida1);
+						Arrays.asList(idsp1, idsp2), ida1);
 
 				Thesis idt3 = new Thesis("Digitālās identitātes pārvaldības risinājumi un to pielietojums",
 						"Digital identity management solutions and their application",
 						Arrays.asList(Area.security, Area.development), Complexity.average,
 						"Kvalifikācijas darbā tiks pētīti un analizēti dažādi digitālās identitātes pārvaldības risinājumi, to priekšrocības un iespējamās problēmas. Tiks aplūkotas dažādas tehnoloģijas, protokoli un standarti, kas tiek izmantoti digitālās identitātes pārvaldībā, kā arī to pielietojums dažādās nozarēs un lietojumprogrammās. Galvenais mērķis ir izstrādāt ieteikumus un vadlīnijas digitālās identitātes pārvaldības risinājumu ieviešanai un uzlabošanai.",
-						ida1);
+						Arrays.asList(idsp2, idsp3), ida1);
 
 				Thesis idt4 = new Thesis("Sociālo tīklu ietekme uz sabiedrību un indivīdu privātumu",
 						"The impact of social networks on society and individual privacy",
 						Arrays.asList(Area.social, Area.privacy), Complexity.very_complex,
 						"The qualification work will investigate the influence of social networks on society and the implications for individual privacy. It will analyze the effects of social media platforms on social interactions, communication patterns, and information sharing. The work will examine the privacy concerns associated with the collection, storage, and sharing of personal data on social networks and explore the ethical and legal considerations related to privacy protection. The main objective is to propose strategies for individuals and organizations to enhance privacy and mitigate the negative consequences of social network usage.",
-						ida1);
+						Arrays.asList(idsp2, idsp3), ida1);
 
 				Thesis idt5 = new Thesis("Biometriskās identifikācijas tehnoloģijas un to drošības aspekti",
 						"Biometric identification technologies and their security aspects",
 						Arrays.asList(Area.security, Area.biometrics), Complexity.complex,
 						"The qualification work aims to explore and analyze various biometric identification technologies, their advantages, and potential security issues. It will examine different biometric modalities such as fingerprints, iris recognition, and facial recognition, as well as the challenges and privacy concerns associated with biometric data. The main objective is to evaluate the security aspects of biometric identification technologies and propose recommendations for their secure implementation and usage.",
-						ida2);
+						Arrays.asList(idsp1, idsp2, idsp3), ida2);
 
 				Thesis idt6 = new Thesis("Virtuālās valūtas un blokķēdes tehnoloģiju ietekme uz finanšu nozarēm",
 						"The impact of virtual currencies and blockchain technologies on the financial sector",
 						Arrays.asList(Area.finance, Area.technology), Complexity.very_complex,
 						"The qualification work will explore the influence of virtual currencies, such as Bitcoin, and blockchain technologies on the financial sector. It will analyze the advantages and challenges of using virtual currencies for financial transactions, as well as the potential applications of blockchain technology in areas such as payment systems, smart contracts, and identity verification. The main goal is to assess the impact of these technologies on financial institutions and propose strategies for their effective integration into the existing financial infrastructure.",
-						ida2);
+						Arrays.asList(idsp1, idsp2, idsp3), ida2);
 
 				Thesis idt7 = new Thesis("Mobilās lietotnes izstrāde un to lietojums mācību procesā",
 						"Mobile application development and its application in the learning process",
 						Arrays.asList(Area.development, Area.education), Complexity.average,
 						"The qualification work will focus on the development of mobile applications and their application in the learning process. It will explore the use of mobile technologies, such as smartphones and tablets, in educational settings and analyze the benefits and challenges of mobile learning. The work will involve designing and implementing a mobile application prototype that supports learning activities and evaluating its effectiveness in enhancing the learning experience. The main objective is to provide recommendations for the development and integration of mobile applications in educational institutions.",
-						ida2);
+						Arrays.asList(idsp1, idsp2, idsp3), ida2);
 
 				Thesis idt8 = new Thesis("Datu analīzes metožu izmantošana biznesa lēmumu pieņemšanā",
 						"Utilization of data analysis methods in business decision-making",
 						Arrays.asList(Area.analytics, Area.business), Complexity.easy,
 						"The qualification work will investigate the utilization of data analysis methods in the context of business decision-making. It will explore various data analysis techniques, such as statistical analysis, machine learning, and data visualization, and their application in solving business problems. The work will involve collecting and analyzing real-world business data and using appropriate data analysis tools to derive insights and support decision-making processes. The main goal is to provide recommendations for the effective use of data analysis methods in business environments.",
-						ida2);
+						Arrays.asList(idsp1, idsp2, idsp3), ida2);
 
 				thesisRepo.save(idt1);
 				thesisRepo.save(idt2);

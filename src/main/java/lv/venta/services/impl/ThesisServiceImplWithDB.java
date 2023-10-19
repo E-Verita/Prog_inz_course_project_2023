@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import lv.venta.models.Area;
 import lv.venta.models.Complexity;
 import lv.venta.models.Thesis;
+import lv.venta.models.ThesisApplication;
 import lv.venta.models.users.AcademicPersonel;
 import lv.venta.models.users.Student;
 import lv.venta.repos.IThesisRepo;
@@ -66,26 +67,6 @@ public class ThesisServiceImplWithDB implements IThesisService {
 	}
 
 	@Override
-	public void updateThesisById(long id, String titleLv, String titleEn, Collection<Area> areas, Complexity complexity,
-			String privateNotes, String publicNotes,  Collection<StudyProgram> programs, Student assignedStudent, AcademicPersonel supervisor) throws Exception {
-		if (thesisRepo.existsById(id)) {
-	        Thesis updatedThesis = thesisRepo.findById(id).get();
-	        updatedThesis.setTitleLv(titleLv);
-	        updatedThesis.setTitleEn(titleEn);
-	        updatedThesis.setAreas(areas);
-	        updatedThesis.setComplexity(complexity);
-	        updatedThesis.setPrivateNotes(privateNotes);
-	        updatedThesis.setPublicNotes(publicNotes);
-	        updatedThesis.setProgramms(programs);
-	        updatedThesis.setAssignedStudent(assignedStudent);
-	        updatedThesis.setSupervisor(supervisor);
-	        thesisRepo.save(updatedThesis);
-	    } else {
-	        throw new Exception("Invalid ID");
-	    }
-	}
-
-	@Override
 	public ArrayList<Thesis> selectAllByAssignedStudentIsNull()  throws Exception{
 		try {
 			return (ArrayList<Thesis>) thesisRepo.findAllByAssignedStudentIsNull();
@@ -93,6 +74,37 @@ public class ThesisServiceImplWithDB implements IThesisService {
 			throw new Exception("Cannot get unassigned thesis records from DB: " + e.getMessage());
 		}
 	}
-	
-	
+
+	@Override
+	public void updateThesisById(long thesisId, String titleLv, String titleEn, int applications,
+			Collection<Area> areas, Complexity complexity, String privateNotes, String publicNotes,
+			Student assignedStudent, AcademicPersonel supervisor, Collection<AcademicPersonel> reviewers,
+			Collection<ThesisApplication> thesisApplications) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateThesisById(long id, Thesis thesis) throws Exception {
+		if (thesisRepo.existsById(id)) {
+	        Thesis updatedThesis = thesisRepo.findById(id).get();
+		updatedThesis.setTitleLv(thesis.getTitleLv());
+        updatedThesis.setTitleEn(thesis.getTitleEn());
+        updatedThesis.setApplications(thesis.getApplications());
+        updatedThesis.setAreas(thesis.getAreas());
+        updatedThesis.setComplexity(thesis.getComplexity());
+        updatedThesis.setPrivateNotes(thesis.getPrivateNotes());
+        updatedThesis.setPublicNotes(thesis.getPublicNotes());
+        updatedThesis.setAssignedStudent(thesis.getAssignedStudent());
+        updatedThesis.setSupervisor(thesis.getSupervisor());
+        updatedThesis.setReviewers(thesis.getReviewers());
+        updatedThesis.setThesisApplications(thesis.getThesisApplications());
+        
+        thesisRepo.save(updatedThesis);
+		} else {
+	        throw new Exception("Invalid ID");
+	    }
+	}
+
+		
 }

@@ -8,4 +8,6 @@ public interface IStudentService {
 
 	ArrayList<Student> findAll() throws Exception;
 
+	Student getStudentById(long studentId) throws Exception;
+
 }

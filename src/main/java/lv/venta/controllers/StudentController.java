@@ -95,44 +95,63 @@ public class StudentController {
 	}
 
 	@PostMapping("/addNew/{thesisId}")
-	public String addNewThesisApplication(@Valid @ModelAttribute ThesisApplication application, @PathVariable("thesisId") long thesisId, BindingResult result,
-			Model model) throws Exception {
+	public String addNewThesisApplication(@Valid @ModelAttribute ThesisApplication application,
+			@PathVariable("thesisId") long thesisId, BindingResult result, Model model) throws Exception {
 		Thesis thesis = thesisService.getThesisById(thesisId);
-	    application.setThesis(thesis);
+		application.setThesis(thesis);
 		System.out.println("0: " + application.getThesis() + "\n" + application.getStudent() + "\n"
 				+ application.getAim() + "\n" + application.getTasks());
 		if (!result.hasErrors()) {
 			try {
-				applicationService.insertNewThesisApplication(application.getThesis(), application.getStudent(),
+				ThesisApplication savedApplication = applicationService.insertNewThesisApplication(application.getThesis(), application.getStudent(),
 						application.getAim(), application.getTasks());
+				thesis.setApplications(thesis.getApplications()+1);
+				thesisService.updateThesisById(thesisId, thesis);
 				// 1
-				System.out.println( "1: " + application.getThesis() + "\n" + application.getStudent() + "\n"
-						+ application.getAim() + "\n" + application.getTasks());
+				System.out.println("1: " + application.getThesis() + "\n" + application.getStudent() + "\n"
+						+ application.getAim() + "\n" + application.getTasks() +  "\n" + application.getIdta());
 				// return "redirect:/thesis/apply";
-				return "redirect:/student/application";
+				return "redirect:/student/application/" + savedApplication.getIdta() +"/"+ savedApplication.getThesis().getIdt() +"/"+ savedApplication.getStudent().getIdp();
 
 			} catch (Exception e) {
-				//2
+				// 2
 				System.out.println("2: " + application.getThesis() + "\n" + application.getStudent() + "\n"
 						+ application.getAim() + "\n" + application.getTasks());
 				model.addAttribute("error", e.getMessage());
 				return "error-page";
 			}
 		} else {
-			//3
-			System.out.println("3: " +  application.getStudent() + "\n"
-					+ application.getAim() + "\n" + application.getTasks());
+			// 3
+			System.out.println(
+					"3: " + application.getStudent() + "\n" + application.getAim() + "\n" + application.getTasks());
 			ArrayList<Student> students = (ArrayList<Student>) studentService.findAll();
 			model.addAttribute("students", students);
 			model.addAttribute("thesis", application.getThesis());
-	        model.addAttribute("application", application);
+			model.addAttribute("application", application);
 			return "application-add-page";
 		}
 	}
 
-	@GetMapping("/application")
-	public String applicationSuccessful(Model model) throws Exception {
-		return "landing-page";
+	@GetMapping("/application/{applicationId}/{thesisId}/{studentId}")
+	public String applicationSuccessful(@PathVariable("applicationId") long applicationId, @PathVariable("thesisId") long thesisId, @PathVariable("studentId") long studentId, Model model) throws Exception {
+		try {
+			ThesisApplication thesisApplication = applicationService.getThesisApplicationById(applicationId);
+			Thesis thesis = thesisService.getThesisById(thesisId);
+			Student student = studentService.getStudentById(studentId);
+			if (thesisApplication == null) {
+				throw new Exception("Thesis application not found with ID: " + applicationId);
+			}		
+				
+			System.err.println("\n\nApplication id: " + thesisApplication.getIdta() + " , thesis id: " + thesisApplication.getThesis().getIdt()); 
+			model.addAttribute("thesis", thesis);
+			model.addAttribute("student", student);
+			model.addAttribute("thesisApplication", thesisApplication);
+			System.err.println("\n\n " + thesisApplication);
+			return "application-success-student";
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+			return "error-page";
+		}
 	}
 
 }

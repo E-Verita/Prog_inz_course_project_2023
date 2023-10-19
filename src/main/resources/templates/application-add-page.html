@@ -9,17 +9,14 @@
 
 <body>
 	<nav>
-		<button type="button" th:text="#{switch-en}" onclick="window.location.href='?localeData=en'"
-			style="position: absolute; top: 10px; right: 70px;">
-			<img src="flag_en.png" alt="English" style="width: 20px; height: 20px;">
-		</button>
-		<button type="button" th:text="#{switch-root}" onclick="window.location.href='?localeData=root'"
-			style="position: absolute; top: 10px; right: 10px;">
-			<img src="flag_lv.png" alt="Latvian" style="width: 20px; height: 20px;">
-		</button>
-		<button type="button" onclick="location.href='/logout'" style="position: absolute; top: 10px; right: 130px;"
-			th:text="#{logout-button}"></button>
-	</nav>
+        <button type="button" th:text="#{switch-en}" onclick="window.location.href='?localeData=en'" style="position: absolute; top: 10px; right: 70px;">
+            <img src="flag_en.png" alt="English" style="width: 20px; height: 20px;">
+        </button>
+        <button type="button" th:text="#{switch-root}" onclick="window.location.href='?localeData=root'" style="position: absolute; top: 10px; right: 10px;">
+            <img src="flag_lv.png" alt="Latvian" style="width: 20px; height: 20px;">
+        </button>
+        <button type="button" onclick="location.href='/logout'" style="position: absolute; top: 10px; right: 130px;" th:text="#{logout-button}"></button>
+    </nav>
 	<h2 th:text="#{application-new}"></h2>
 	<div class="container">
 		<table>
@@ -52,21 +49,13 @@
 				<td th:text="${thesis.publicNotes}"></td>
 			</tr>
 			<tr>
-				<th th:text="#{study-program}"></th>
-				<td>
-					<ul>
-						<li th:each="program : ${thesis.programms}" th:text="${program.level}"></li>
-					</ul>
-				</td>
-			</tr>
-			<tr>
 				<th th:text="#{thesis-supervisor}"></th>
 				<td th:text="${thesis.supervisor?.name + ' ' + thesis.supervisor?.surname}"></td>
 			</tr>
 		</table>
 	</div>
 	<div class="container">
-		<form th:action="@{'/student/addNew/' + ${thesis.idt}}" th:object="${application}" method="post">
+<form th:action="@{'/student/addNew/' + ${thesis.idt}}" th:object="${application}" method="post">
 			<!--<form th:action="@{'/application/addNew/'}"  th:object="${application}" method="post">  -->
 
 			<table>
@@ -102,7 +91,7 @@
 			<div align="center">
 				<input type="hidden" id="thesis.idt" name="thesis.idt" th:value="${thesis.idt}" />
 				<button type="submit" th:text="#{submit-button}"></button>
-				<button type="button" onclick="location.href='/student/apply'" th:text="#{cancel-button}"></button>
+				<button type="button" onclick="location.href='/student/apply'"  th:text="#{cancel-button}"></button>
 				<!-- <button type="button" onclick="location.href='/thesis/apply'">Cancel</button> -->
 
 			</div>

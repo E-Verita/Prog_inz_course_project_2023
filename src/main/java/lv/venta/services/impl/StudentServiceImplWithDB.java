@@ -25,4 +25,14 @@ public class StudentServiceImplWithDB implements IStudentService{
 		}
 	}
 
+	@Override
+	public Student getStudentById(long id) throws Exception {
+		// TODO Auto-generated method stub
+		if (studentRepo.existsById(id)) {
+			return studentRepo.findById(id).get();
+		} else {
+			throw new Exception("Incorrect Id");
+		}
+	}
+
 }

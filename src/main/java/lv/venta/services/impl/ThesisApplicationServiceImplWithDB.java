@@ -16,9 +16,17 @@ public class ThesisApplicationServiceImplWithDB  implements IThesisAplicationSer
 	private IThesisApplicationRepo applicationRepo;
 	
 	@Override
-	public void insertNewThesisApplication(Thesis thesis, Student student,  String aim,  String tasks) {
-		applicationRepo.save(new ThesisApplication(thesis, student,  aim,  tasks));
+	public ThesisApplication insertNewThesisApplication(Thesis thesis, Student student,  String aim,  String tasks) {
+		return applicationRepo.save(new ThesisApplication(thesis, student,  aim,  tasks));
 	}
 
+	@Override
+	public ThesisApplication getThesisApplicationById(long id) throws Exception {
+		if (applicationRepo.existsById(id)) {
+			return applicationRepo.findById(id).get();
+		} else {
+			throw new Exception("Incorrect Id");
+		}
+	}
 	
 }

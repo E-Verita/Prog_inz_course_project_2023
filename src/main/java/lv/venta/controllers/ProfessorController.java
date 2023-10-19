@@ -191,9 +191,7 @@ public class ProfessorController {
 			Model model) {
 		if (!result.hasErrors()) {
 			try {
-				thesisService.updateThesisById(id, thesis.getTitleLv(), thesis.getTitleEn(), thesis.getAreas(),
-						thesis.getComplexity(), thesis.getPrivateNotes(), thesis.getPublicNotes(), thesis.getProgramms(),
-						thesis.getAssignedStudent(), thesis.getSupervisor());
+				thesisService.updateThesisById(id, thesis);
 				return "redirect:/professor/show/" + id;
 			} catch (Exception e) {
 				model.addAttribute("error", e.getMessage());

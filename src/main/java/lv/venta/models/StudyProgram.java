@@ -37,7 +37,6 @@ import lv.venta.models.users.User;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class StudyProgram {
 	@Setter(value = AccessLevel.NONE)
 	@Column(name = "Idsp")
@@ -121,6 +120,14 @@ public class StudyProgram {
 		this.thesisSemester = thesisSemester;
 		this.startYear = startYear;
 		this.gradYear = gradYear;
+	}
+
+	@Override
+	public String toString() {
+		return "StudyProgram [idsp=" + idsp + ", title=" + title + ", director=" + director + ", studytype=" + studytype
+				+ ", level=" + level + ", noOfSemester=" + noOfSemester + ", thesisSemester=" + thesisSemester
+				+ ", startYear=" + startYear + ", gradYear=" + gradYear + ", students=" + students
+				+ ", thesisForProgram=" + thesisForProgram + "]";
 	}
 	
 	

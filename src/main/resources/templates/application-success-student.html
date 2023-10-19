@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{thesis-application-success}"></title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+    <nav>
+        <button type="button" th:text="#{switch-en}" onclick="window.location.href='?localeData=en'"
+            style="position: absolute; top: 10px; right: 70px;">
+            <img src="flag_en.png" alt="English" style="width: 20px; height: 20px;">
+        </button>
+        <button type="button" th:text="#{switch-root}" onclick="window.location.href='?localeData=root'"
+            style="position: absolute; top: 10px; right: 10px;">
+            <img src="flag_lv.png" alt="Latvian" style="width: 20px; height: 20px;">
+        </button>
+        <button type="button" onclick="location.href='/logout'" style="position: absolute; top: 10px; right: 130px;"
+            th:text="#{logout-button}"></button>
+    </nav>
+    <h2 th:text="#{thesis-application-success}"></h2>
+    <div class="container">
+        <div class="column">
+            <table>
+                <tr>
+                    <th th:text="#{application-id}"></th>
+                    <td th:text="${thesisApplication.idta}"></td>
+                </tr>
+                 <tr>
+                    <th th:text="#{thesis-supervisor}"></th>
+                    <td th:text="${thesis.supervisor?.name + ' ' + thesis.supervisor?.surname}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{application-aim}"></th>
+                    <td th:text="${thesisApplication.aim}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{application-tasks}"></th>
+                    <td th:text="${thesisApplication.tasks}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{application-application-date}"></th>
+                    <td th:text="${thesisApplication.applicationDate}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{application-status}"></th>
+                    <td th:text="${thesisApplication.status}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{thesis-title-lv}"></th>
+                    <td th:text="${thesisApplication.thesis.titleLv}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{thesis-title-en}"></th>
+                    <td th:text="${thesisApplication.thesis.titleEn}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{application-student-name}"></th>
+                    <td th:text="${thesisApplication.student.name +  ' ' + student.surname}"></td>
+                </tr>
+            </table>
+            <div align="center">
+                <!-- Add any additional actions or buttons here -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+

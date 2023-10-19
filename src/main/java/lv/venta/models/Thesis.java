@@ -42,7 +42,6 @@ import lv.venta.models.users.Student;
 @Entity
 @Getter
 @Setter
-@ToString
 public class Thesis {
 	@Setter(value = AccessLevel.NONE)
 	@Column(name = "Idt")
@@ -182,6 +181,15 @@ public class Thesis {
         this.supervisor = null;
         this.reviewers = new ArrayList<>();
         this.thesisApplications = new ArrayList<>();
+	}
+
+	@Override
+	public String toString() {
+		return "Thesis [idt=" + idt + ", titleLv=" + titleLv + ", titleEn=" + titleEn + ", applications=" + applications
+				+ ", areas=" + areas + ", complexity=" + complexity + ", privateNotes=" + privateNotes
+				+ ", publicNotes=" + publicNotes + ", assignedStudent=" + assignedStudent + ", supervisor=" + supervisor
+				+ ", reviewers=" + reviewers + ", programms=" + programms
+				+ "]";
 	}
  
 	

@@ -1,0 +1,105 @@
+2023-10-20 13:52:21,996 INFO  StartupInfoLogger:51 - [] Starting ProgInzCourseProject2023Application using Java 17.0.6 with PID 5696 (F:\OneDrive\Dokumenti\Venstpils_Augstskola\Programaturas_inzenierija\Praktiska\Prog_Inz_Course_Project_2023\target\classes started by User in F:\OneDrive\Dokumenti\Venstpils_Augstskola\Programaturas_inzenierija\Praktiska\Prog_Inz_Course_Project_2023)
+2023-10-20 13:52:21,999 INFO  SpringApplication:633 - [] No active profile set, falling back to 1 default profile: "default"
+2023-10-20 13:52:22,492 INFO  RepositoryConfigurationDelegate:138 - [] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-10-20 13:52:22,562 INFO  RepositoryConfigurationDelegate:208 - [] Finished Spring Data repository scanning in 64 ms. Found 13 JPA repository interfaces.
+2023-10-20 13:52:22,956 INFO  TomcatWebServer:108 - [] Tomcat initialized with port(s): 7777 (http)
+2023-10-20 13:52:22,964 INFO  DirectJDKLog:173 - [] Starting service [Tomcat]
+2023-10-20 13:52:22,964 INFO  DirectJDKLog:173 - [] Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-10-20 13:52:23,033 INFO  DirectJDKLog:173 - [] Initializing Spring embedded WebApplicationContext
+2023-10-20 13:52:23,033 INFO  ServletWebServerApplicationContext:291 - [] Root WebApplicationContext: initialization completed in 1004 ms
+2023-10-20 13:52:23,137 INFO  LogHelper:31 - [] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-10-20 13:52:23,170 INFO  Version:44 - [] HHH000412: Hibernate ORM core version 6.2.2.Final
+2023-10-20 13:52:23,172 INFO  Environment:191 - [] HHH000406: Using bytecode reflection optimizer
+2023-10-20 13:52:23,268 INFO  BytecodeProviderInitiator:53 - [] HHH000021: Bytecode provider name : bytebuddy
+2023-10-20 13:52:23,359 INFO  SpringPersistenceUnitInfo:87 - [] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-10-20 13:52:23,373 INFO  HikariDataSource:110 - [] HikariPool-1 - Starting...
+2023-10-20 13:52:23,376 WARN  DriverDataSource:70 - [] Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2023-10-20 13:52:23,470 INFO  HikariPool:565 - [] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@c11332b
+2023-10-20 13:52:23,472 INFO  HikariDataSource:123 - [] HikariPool-1 - Start completed.
+2023-10-20 13:52:23,507 INFO  DialectFactoryImpl:93 - [] HHH035001: Using dialect: org.hibernate.dialect.MySQLDialect, version: 5.7
+2023-10-20 13:52:23,658 WARN  EntityBinder:779 - [] HHH000137: Root entity should not hold a PrimaryKeyJoinColum(s), will be ignored: lv.venta.models.users.AcademicPersonel
+2023-10-20 13:52:23,664 WARN  EntityBinder:779 - [] HHH000137: Root entity should not hold a PrimaryKeyJoinColum(s), will be ignored: lv.venta.models.users.Student
+2023-10-20 13:52:23,721 INFO  BytecodeProviderInitiator:53 - [] HHH000021: Bytecode provider name : bytebuddy
+2023-10-20 13:52:24,360 INFO  JtaPlatformInitiator:51 - [] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-10-20 13:52:24,692 INFO  AbstractEntityManagerFactoryBean:437 - [] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-10-20 13:52:24,984 WARN  JpaBaseConfiguration$JpaWebConfiguration:231 - [] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-10-20 13:52:25,217 INFO  DefaultSecurityFilterChain:54 - [] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@403f6c04, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2693e39c, org.springframework.security.web.context.SecurityContextHolderFilter@2b9a7211, org.springframework.security.web.header.HeaderWriterFilter@77350382, org.springframework.security.web.csrf.CsrfFilter@2ab1c7a9, org.springframework.security.web.authentication.logout.LogoutFilter@568cbf8d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@24facb47, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@2b3ee95e, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@4bbabec8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5482b32a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6bf2ecbb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1043c493, org.springframework.security.web.access.ExceptionTranslationFilter@17e725fb, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@648c80cb]
+2023-10-20 13:52:25,219 WARN  WebSecurity:289 - [] You are asking Spring Security to ignore Ant [pattern='/h2-console/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20 13:52:25,220 INFO  DefaultSecurityFilterChain:51 - [] Will not secure Ant [pattern='/h2-console/**']
+2023-10-20 13:52:25,433 INFO  TomcatWebServer:220 - [] Tomcat started on port(s): 7777 (http) with context path ''
+2023-10-20 13:52:25,439 INFO  StartupInfoLogger:57 - [] Started ProgInzCourseProject2023Application in 3.736 seconds (process running for 4.247)
+2023-10-20 13:53:10,847 INFO  DirectJDKLog:173 - [] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-10-20 13:53:10,847 INFO  FrameworkServlet:532 - [] Initializing Servlet 'dispatcherServlet'
+2023-10-20 13:53:10,849 INFO  FrameworkServlet:554 - [] Completed initialization in 2 ms
+2023-10-20 13:53:23,281 DEBUG StudentController:90 - [] Method: addNewApplication
+2023-10-20 13:53:28,586 WARN  AbstractHandlerExceptionResolver:207 - [] Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public java.lang.String lv.venta.controllers.StudentController.addNewThesisApplication(lv.venta.models.ThesisApplication,long,org.springframework.validation.BindingResult,org.springframework.ui.Model) throws java.lang.Exception with 2 errors: [Field error in object 'thesisApplication' on field 'aim': rejected value [fdgdfg]; codes [Size.thesisApplication.aim,Size.aim,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [thesisApplication.aim,aim]; arguments []; default message [aim],1000,20]; default message [size must be between 20 and 1000]] [Field error in object 'thesisApplication' on field 'tasks': rejected value [dfgdfg]; codes [Size.thesisApplication.tasks,Size.tasks,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [thesisApplication.tasks,tasks]; arguments []; default message [tasks],500,20]; default message [size must be between 20 and 500]] ]
+2023-10-20 13:53:30,131 DEBUG StudentController:90 - [] Method: addNewApplication
+2023-10-20 13:53:37,294 DEBUG StudentController:110 - [] Method: addNewThesisApplication
+2023-10-20 13:53:37,354 DEBUG StudentController:144 - [] Method: applicationSuccessful
+2023-10-20 13:53:37,374 WARN  StudentController:157 - [] Application id: 52 submitted successfully
+2023-10-20 14:32:22,281 INFO  SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin:159 - [] Application shutdown requested.
+2023-10-20 14:32:22,292 INFO  DirectJDKLog:173 - [] Stopping service [Tomcat]
+2023-10-20 14:32:22,293 INFO  DirectJDKLog:173 - [] Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-10-20 14:32:22,300 INFO  AbstractEntityManagerFactoryBean:650 - [] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-10-20 14:32:22,302 INFO  HikariDataSource:350 - [] HikariPool-1 - Shutdown initiated...
+2023-10-20 14:32:22,304 INFO  HikariDataSource:352 - [] HikariPool-1 - Shutdown completed.
+2023-10-20 14:32:25,785 INFO  StartupInfoLogger:51 - [] Starting ProgInzCourseProject2023Application using Java 17.0.6 with PID 15184 (F:\OneDrive\Dokumenti\Venstpils_Augstskola\Programaturas_inzenierija\Praktiska\Prog_Inz_Course_Project_2023\target\classes started by User in F:\OneDrive\Dokumenti\Venstpils_Augstskola\Programaturas_inzenierija\Praktiska\Prog_Inz_Course_Project_2023)
+2023-10-20 14:32:25,788 INFO  SpringApplication:633 - [] No active profile set, falling back to 1 default profile: "default"
+2023-10-20 14:32:26,259 INFO  RepositoryConfigurationDelegate:138 - [] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-10-20 14:32:26,322 INFO  RepositoryConfigurationDelegate:208 - [] Finished Spring Data repository scanning in 56 ms. Found 13 JPA repository interfaces.
+2023-10-20 14:32:26,698 INFO  TomcatWebServer:108 - [] Tomcat initialized with port(s): 7777 (http)
+2023-10-20 14:32:26,706 INFO  DirectJDKLog:173 - [] Starting service [Tomcat]
+2023-10-20 14:32:26,707 INFO  DirectJDKLog:173 - [] Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-10-20 14:32:26,783 INFO  DirectJDKLog:173 - [] Initializing Spring embedded WebApplicationContext
+2023-10-20 14:32:26,784 INFO  ServletWebServerApplicationContext:291 - [] Root WebApplicationContext: initialization completed in 961 ms
+2023-10-20 14:32:26,886 INFO  LogHelper:31 - [] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-10-20 14:32:26,922 INFO  Version:44 - [] HHH000412: Hibernate ORM core version 6.2.2.Final
+2023-10-20 14:32:26,923 INFO  Environment:191 - [] HHH000406: Using bytecode reflection optimizer
+2023-10-20 14:32:27,025 INFO  BytecodeProviderInitiator:53 - [] HHH000021: Bytecode provider name : bytebuddy
+2023-10-20 14:32:27,114 INFO  SpringPersistenceUnitInfo:87 - [] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-10-20 14:32:27,126 INFO  HikariDataSource:110 - [] HikariPool-1 - Starting...
+2023-10-20 14:32:27,129 WARN  DriverDataSource:70 - [] Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2023-10-20 14:32:27,224 INFO  HikariPool:565 - [] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3005623b
+2023-10-20 14:32:27,225 INFO  HikariDataSource:123 - [] HikariPool-1 - Start completed.
+2023-10-20 14:32:27,261 INFO  DialectFactoryImpl:93 - [] HHH035001: Using dialect: org.hibernate.dialect.MySQLDialect, version: 5.7
+2023-10-20 14:32:27,407 WARN  EntityBinder:779 - [] HHH000137: Root entity should not hold a PrimaryKeyJoinColum(s), will be ignored: lv.venta.models.users.AcademicPersonel
+2023-10-20 14:32:27,413 WARN  EntityBinder:779 - [] HHH000137: Root entity should not hold a PrimaryKeyJoinColum(s), will be ignored: lv.venta.models.users.Student
+2023-10-20 14:32:27,468 INFO  BytecodeProviderInitiator:53 - [] HHH000021: Bytecode provider name : bytebuddy
+2023-10-20 14:32:28,144 INFO  JtaPlatformInitiator:51 - [] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-10-20 14:32:28,454 INFO  AbstractEntityManagerFactoryBean:437 - [] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-10-20 14:32:28,725 WARN  JpaBaseConfiguration$JpaWebConfiguration:231 - [] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-10-20 14:32:28,951 INFO  DefaultSecurityFilterChain:54 - [] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@304933cb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7a4199e5, org.springframework.security.web.context.SecurityContextHolderFilter@3b4b2c03, org.springframework.security.web.header.HeaderWriterFilter@40e90634, org.springframework.security.web.csrf.CsrfFilter@f36c8b1, org.springframework.security.web.authentication.logout.LogoutFilter@54644470, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@333e01c6, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4d25943d, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@6fe55fcf, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5fb58f15, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1f8ac459, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4d1f6e1c, org.springframework.security.web.access.ExceptionTranslationFilter@7acbd3d0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@322399e6]
+2023-10-20 14:32:28,957 WARN  WebSecurity:289 - [] You are asking Spring Security to ignore Ant [pattern='/h2-console/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-10-20 14:32:28,957 INFO  DefaultSecurityFilterChain:51 - [] Will not secure Ant [pattern='/h2-console/**']
+2023-10-20 14:32:29,154 INFO  TomcatWebServer:220 - [] Tomcat started on port(s): 7777 (http) with context path ''
+2023-10-20 14:32:29,160 INFO  StartupInfoLogger:57 - [] Started ProgInzCourseProject2023Application in 3.666 seconds (process running for 4.131)
+2023-10-20 14:32:31,689 INFO  DirectJDKLog:173 - [] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-10-20 14:32:31,689 INFO  FrameworkServlet:532 - [] Initializing Servlet 'dispatcherServlet'
+2023-10-20 14:32:31,690 INFO  FrameworkServlet:554 - [] Completed initialization in 0 ms
+2023-10-20 14:32:36,350 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-20 14:33:00,372 DEBUG ProfessorController:98 - [] Method: showAddThesisForm
+2023-10-20 14:33:47,589 DEBUG ProfessorController:116 - [] Method: addNewThesis
+2023-10-20 14:33:47,636 WARN  ProfessorController:122 - [] Thesis Test tema added by Estere Vitola
+2023-10-20 14:33:47,646 DEBUG ProfessorController:77 - [] Method: showThesisBSupervisorId
+2023-10-20 14:33:47,690 WARN  AbstractHandlerExceptionResolver:207 - [] Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'long'; For input string: "flag_lv.png"]
+2023-10-20 14:33:54,610 DEBUG ProfessorController:142 - [] Method: showThesisById
+2023-10-20 14:34:01,496 DEBUG ProfessorController:193 - [] Method: showUpdateThesisForm
+2023-10-20 14:34:06,889 DEBUG ProfessorController:220 - [] Method: updateThesisById
+2023-10-20 14:34:06,908 WARN  ProfessorController:225 - [] Thesis wit ID 102 updated
+2023-10-20 14:34:06,916 DEBUG ProfessorController:142 - [] Method: showThesisById
+2023-10-20 14:34:14,110 DEBUG ProfessorController:177 - [] Method: removeThesisByIdRedirected
+2023-10-20 14:34:14,123 WARN  ProfessorController:181 - [] Thesis with ID 102 deleted.
+2023-10-20 14:34:14,139 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-20 14:34:49,855 DEBUG StudentController:55 - [] Method: showAwailableThesis
+2023-10-20 14:35:02,481 DEBUG StudentController:73 - [] Method: showThesisInformation
+2023-10-20 14:35:07,998 DEBUG StudentController:90 - [] Method: addNewApplication
+2023-10-20 14:35:24,909 DEBUG StudentController:110 - [] Method: addNewThesisApplication
+2023-10-20 14:35:24,929 DEBUG StudentController:144 - [] Method: applicationSuccessful
+2023-10-20 14:35:24,943 WARN  StudentController:157 - [] Application id: 102 submitted successfully
+2023-10-20 14:36:20,530 DEBUG ProfessorController:56 - [] Method: showAllThesis
+2023-10-20 14:38:27,363 INFO  SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin:159 - [] Application shutdown requested.
+2023-10-20 14:38:27,373 INFO  DirectJDKLog:173 - [] Stopping service [Tomcat]
+2023-10-20 14:38:27,374 INFO  DirectJDKLog:173 - [] Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-10-20 14:38:27,389 INFO  AbstractEntityManagerFactoryBean:650 - [] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-10-20 14:38:27,391 INFO  HikariDataSource:350 - [] HikariPool-1 - Shutdown initiated...
+2023-10-20 14:38:27,396 INFO  HikariDataSource:352 - [] HikariPool-1 - Shutdown completed.

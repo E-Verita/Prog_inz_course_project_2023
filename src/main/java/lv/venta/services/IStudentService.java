@@ -10,4 +10,6 @@ public interface IStudentService {
 
 	Student getStudentById(long studentId) throws Exception;
 
+	Student findByUsername(String currentPrincipalName) throws Exception; 
+
 }

@@ -6,4 +6,6 @@ import lv.venta.models.users.Student;
 
 public interface IStudentRepo extends CrudRepository <Student, Long> {
 
+	Student findBySurnameIgnoreCaseAndNameIgnoreCase(String surname, String name);
+
 }

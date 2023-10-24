@@ -188,7 +188,7 @@ public class Thesis {
 		return "Thesis [idt=" + idt + ", titleLv=" + titleLv + ", titleEn=" + titleEn + ", applications=" + applications
 				+ ", areas=" + areas + ", complexity=" + complexity + ", privateNotes=" + privateNotes
 				+ ", publicNotes=" + publicNotes + ", assignedStudent=" + assignedStudent + ", supervisor=" + supervisor
-				+ ", reviewers=" + reviewers + ", programms=" + programms
+				+ ", reviewers=" + reviewers 
 				+ "]";
 	}
  

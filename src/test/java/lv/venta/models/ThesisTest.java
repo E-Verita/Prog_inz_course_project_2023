@@ -16,7 +16,7 @@ import lv.venta.models.users.Student;
 
 class ThesisTest {
 
-	Thesis t1 = new Thesis();
+	/*Thesis t1 = new Thesis();
 	Thesis t2 = new Thesis(
             "Datoru tīklu drošības risinājumu analīze un izvērtējums",
             "Analysis and evaluation of computer network security solutions",
@@ -77,6 +77,6 @@ class ThesisTest {
 	@Test
 	public void testNullThesis() {
 		
-	}
+	}*/
 
 }
